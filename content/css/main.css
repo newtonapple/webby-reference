@@ -7,7 +7,7 @@ layout:    nil   # no layout
  * ------------------------------------------------------------ */
 h1, h2, h3, h4, a { text-shadow: 0.25em 0.25em 0.45em #888; }
 a                 { font-weight: bold; }
-
+h2                { border-bottom: 1px solid #777; }
 
 /* Layout
  * ------------------------------------------------------------ */
@@ -59,7 +59,7 @@ a                 { font-weight: bold; }
 /* Components 
  * ------------------------------------------------------------ */
 ul.tabs       { border-bottom: 1px solid #DDD; }
-  ul.tabs li  { margin-right:0.1em; }  
+  ul.tabs li  { margin-right:0.1em; }
     ul.tabs a { 
       color:      #555;
       background: #DDD none repeat scroll 0 0; 
@@ -68,9 +68,6 @@ ul.tabs       { border-bottom: 1px solid #DDD; }
       display:         block;
       font-weight:     bold;
       text-decoration: none;
-
     	padding:         0.2em 0.5em;
     	text-shadow:     0.25em 0.25em 0.45em #888; 
     }
-
-

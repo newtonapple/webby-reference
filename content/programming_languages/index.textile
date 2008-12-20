@@ -1,0 +1,17 @@
+---
+browser_title:  Programming Languages
+title:          Programming Languages
+name:           Programming Languages
+created_at:     2008-12-20 12:13:53.726962 -08:00
+filter:
+  - wikiwords
+  - erb
+  - textile
+  - outline
+---
+
+<%= render :partial => '/toc' %>
+
+h2. Ruby
+
+<%= render :partial => '/programming_languages/ruby/index' %>

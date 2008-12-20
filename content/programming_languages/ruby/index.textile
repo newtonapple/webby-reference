@@ -1,0 +1,15 @@
+---
+browser_title:  Ruby
+title:          Ruby
+name:           Ruby
+created_at:     2008-12-20 14:12:45.568513 -08:00
+filter:
+  - wikiwords
+  - erb
+  - textile
+  - outline
+---
+
+<%= render :partial => '/toc' %>
+
+<%= render :partial => '/programming_languages/ruby/index' %>

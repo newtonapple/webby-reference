@@ -1,6 +1,6 @@
 ---
-browser_title: Index
-title:          Apple's Reference
+browser_title:  Index
+title:          Reference Index
 name:           Index
 filter:
   - wikiwords
@@ -11,6 +11,9 @@ filter:
 
 <%= render :partial => '/toc' %>
 
-h2. Ruby
-* [[Ruby Cheatsheet]]
+h2. [[Programming Languages]]
+
+h3. [[Ruby]]
+
+<%= render :partial => '/programming_languages/ruby/index'%>
 

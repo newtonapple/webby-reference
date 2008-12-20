@@ -1,0 +1,163 @@
+---
+browser_title:  Ruby Cheatsheet
+title:          Ruby Cheatsheet
+name:           Ruby Cheatsheet
+filter:
+  - erb
+  - textile
+  - outline
+---
+
+<%= render :partial => '/toc' %>
+
+
+h2. General Resources
+
+"Ruby QuickRef":http://www.zenspider.com/Languages/Ruby/QuickRef.html
+
+
+h2. Language
+
+
+h3. Syntax Rules
+
+* Comments start with a pound/sharp (#) character and go to EOL.
+* Ruby programs are sequence of expressions.
+* Each expression is delimited by semicolons(;) or newlines unless obviously incomplete (e.g. trailing '+').
+* Backslashes at the end of line does not terminate expression.
+
+
+h3. Reserved Words
+
+<% uv :lang => 'ruby' do -%>
+  alias   and     BEGIN   begin   break   case    class   def     defined 
+  do      else    elsif   END     end     ensure  false   for     if 
+  in      module  next    nil     not     or      redo    rescue  retry 
+  return  self    super   then    true    undef   unless  until   when  
+  while   yield
+<% end %>
+
+
+h3. Array
+
+<% uv :lang => 'ruby' do -%>
+  [1, 2, 3]
+  %w(foo bar baz)
+  %W(foo bar baz #{var})
+<% end -%>
+
+
+h3. Numbers 
+
+<% uv :lang => 'ruby' do -%>
+  123 1_234         # integers
+  123.45 1.2e-3     # floating point
+  0xffff            # hex
+  0b01011           # binary 
+  0377              # octal
+  ?a                # ASCII character
+  ?\C-a             # Control-a
+  ?\M-a             # Meta-a
+  ?\M-\C-a          # Meta-Control-a
+<% end -%>
+
+
+h3. String 
+
+In all of the %() cases below, you may use any matching characters or any single character for delimiters. %[], %!!, %@@, etc.
+
+<% uv :lang => 'ruby' do -%>
+  ### string representation ###
+  'no interpolation'
+  "#{interpolation}, and backslashes\n"
+  %q(no interpolation)
+  %Q(interpolation and backslashes)
+  %(interpolation and backslashes)
+  `echo command interpretation with interpolation and backslashes`
+  %x(echo command interpretation with interpolation and backslashes)
+
+  ### backslash escape ###
+  "\t"       # (tab) 
+  "\n"       # (newline) 
+  "\r"       # (carriage eturn) 
+  "\f"       # (form feed)
+  "\b"       # (backspace) 
+  "\a"       # (bell) 
+  "\e"       # (escape) 
+  "\s"       # (whitespace) 
+  "\nnn"     # (octal)
+  "\xnn"     # (hexadecimal) 
+  "\cx"      # (control) 
+  "\C-x"     # (control x)
+  "\M-x"     # (meta x)
+  "\M-\C-x"  # (meta control x)
+<% end -%>
+
+
+h3. Variables
+
+<% uv :lang => 'ruby' do -%>
+  $global_variable
+  @@class_variable
+  @instance_variable
+  OtherClass::CONSTANT
+  local_variable
+<% end -%>
+
+
+h3. Pseudo variables
+
+<% uv :lang => 'ruby' do -%>
+  self     the receiver of the current method
+  nil      the sole instance of the Class NilClass(represents false)
+  true     the sole instance of the Class TrueClass(typical true value)
+  false    the sole instance of the Class FalseClass(represents false)
+  __FILE__ the current source file name.
+  __LINE__ the current line number in the source file.
+<% end -%>
+
+
+h3. Pre-defined variables
+
+<% uv :lang => 'ruby' do -%>
+  $!         #The exception information message set by 'raise'.
+  $@         #Array of backtrace of the last exception thrown.
+  $+         #The last bracket matched by the last successful match.
+  $1         #The Nth group of the last successful match. May be > 1.
+  $~         #The information about the last match in the current scope.
+  $=         #The flag for case insensitive, nil by default.
+  $/         #The input record separator, newline by default.
+  $\         #The output record separator for the print and IO#write. Default is nil.
+  $,         #The output field separator for the print and Array#join.
+  $;         #The default separator for String#split.
+  $.         #The current input line number of the last file that was read.
+  $<         #The virtual concatenation file of the files given on command line.
+  $>         #The default output for print, printf. $stdout by default.
+  $_         #The last input line of string by gets or readline.
+  $0         #Contains the name of the script being executed. May be assignable.
+  $*         #Command line arguments given for the script sans args.
+  $$         #The process number of the Ruby running this script.
+  $?         #The status of the last executed child process.
+  $:         #Load path for scripts and binary modules by load or require.
+  $DEBUG     #The status of the -d switch.
+  $FILENAME  #Current input file from $<. Same as $<.filename.
+  $LOAD_PATH #The alias to the $:.
+  $stderr    #The current standard error output.
+  $stdin     #The current standard input.
+  $stdout    #The current standard output.
+  $VERBOSE   #The verbose flag, which is set by the -v switch.
+  $-0        #The alias to $/.
+  $-a        #True if option -a is set. Read-only variable.
+  $-d        #The alias to $DEBUG.
+  $-F        #The alias to $;.
+  $-i        #In in-place-edit mode, this variable holds the extension, otherwise nil.
+  $-I        #The alias to $:.
+  $-l        #True if option -l is set. Read-only variable.
+  $-p        #True if option -p is set. Read-only variable.
+  $-v        #The alias to $VERBOSE.
+  $-w        #True if option -w is set.
+  $&         #The string matched by the last successful pattern match in this scope.
+  $"         #The array contains the module names loaded by require.
+  $`         #The string to the left  of the last successful match.
+  $'         #The string to the right of the last successful match.
+<% end -%>

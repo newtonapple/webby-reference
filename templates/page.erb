@@ -1,0 +1,15 @@
+---
+browser_title:  <%= title %>
+title:          <%= title %>
+name:           <%= title %>
+created_at:     <%= Time.now.to_y %>
+filter:
+  - wikiwords
+  - erb
+  - textile
+  - outline
+---
+
+<%%= render :partial => '/toc' %>
+
+h2. Topic

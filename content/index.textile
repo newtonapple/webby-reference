@@ -1,0 +1,16 @@
+---
+browser_title: Index
+title:          Apple's Reference
+name:           Index
+filter:
+  - wikiwords
+  - erb
+  - textile
+  - outline
+---
+
+<%= render :partial => '/toc' %>
+
+h2. Ruby
+* [[Ruby Cheatsheet]]
+

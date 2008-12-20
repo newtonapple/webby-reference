@@ -8,6 +8,23 @@ layout:    nil   # no layout
 h1, h2, h3, h4, a { text-shadow: 0.25em 0.25em 0.45em #888; }
 a                 { font-weight: bold; }
 h2                { border-bottom: 1px solid #777; }
+code              { 
+  background-color: #ddd; 
+  border-bottom: 1px dotted #999;
+  padding: 0.25em;
+  
+}
+
+
+/* Typographical
+ * ------------------------------------------------------------ */
+div.content { font-size: 1.2em; }
+a.external  {
+  padding: 0 20px 0 0;
+  background: url(/images/external-link.png) no-repeat 100% 0;
+
+}
+
 
 /* Layout
  * ------------------------------------------------------------ */
@@ -52,17 +69,13 @@ h2                { border-bottom: 1px solid #777; }
 }
 
 
-/* Fonts 
- * ------------------------------------------------------------ */
-.content { font-size: 1.2em; }
-
 /* Components 
  * ------------------------------------------------------------ */
-ul.tabs       { border-bottom: 1px solid #DDD; }
+ul.tabs       { border-bottom: 1px solid #ddd; }
   ul.tabs li  { margin-right:0.1em; }
     ul.tabs a { 
       color:      #555;
-      background: #DDD none repeat scroll 0 0; 
+      background: #ddd none repeat scroll 0 0; 
     }
     ul.tabs a, ul.tabs span {
       display:         block;

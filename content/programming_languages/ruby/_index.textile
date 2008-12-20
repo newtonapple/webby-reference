@@ -7,4 +7,5 @@ filter:
 [[Programming Languages]]
 
 * [[Ruby Cheatsheet]]
+* [[Ruby Class]]
 * [[Ruby One-Liners]]

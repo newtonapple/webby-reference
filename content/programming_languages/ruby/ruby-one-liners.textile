@@ -12,8 +12,6 @@ filter:
 
 <%= render :partial => '/toc' %>
 
-[[Ruby]]
-
 "Source":http://www.fepus.net/ruby1line.txt
 
 

@@ -10,7 +10,6 @@ filter:
 ---
 
 <%= render :partial => '/toc' %>
-[[Ruby]]
 
 h2. General Resources
 

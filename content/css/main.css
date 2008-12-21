@@ -6,8 +6,13 @@ layout:    nil   # no layout
 /* Elements 
  * ------------------------------------------------------------ */
 h1, h2, h3, h4, a { text-shadow: 0.25em 0.25em 0.45em #888; }
-a                 { font-weight: bold; }
 h2                { border-bottom: 1px solid #777; }
+a { 
+  font-weight: bold; 
+/*  color: #3366BB;*/
+  color: #004080;
+}
+
 code              { 
   background-color: #ddd; 
   border-bottom: 1px dotted #999;

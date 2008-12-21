@@ -1,0 +1,357 @@
+---
+browser_title:  Ruby Metaprogramming
+title:          Ruby Metaprogramming
+name:           Ruby Metaprogramming
+created_at:     2008-12-20 15:55:16.620527 -08:00
+filter:
+  - wikiwords
+  - erb
+  - textile
+  - outline
+---
+
+<%= render :partial => '/toc' %>
+
+
+
+
+
+<!-- Metaclass -->
+
+h2. Metaclass
+
+"Reference by _why":http://whytheluckystiff.net/articles/seeingMetaclassesClearly.html
+
+In Ruby everything is an object, even Class (sort of, see reference).  
+Every object also has at least one meta-object lurks behind it. The meta-object serves as an easy way to intercept singleton-method overrides for the object. 
+
+A method is first looked up in the object's metaclass, then the object's parent class, then to parent class' metaclass than to parent class's parent class, and so on...
+Note that meta-object is also an object, so itself can also contain an meta-object: the meta-meta-object.
+
+Here is a set of useful methods when doing metaporgramming:
+
+<% uv :lang=>"ruby" do -%>
+  class Object
+    # The hidden singleton lurks behind everyone
+    def metaclass; class << self; self; end; end
+    def meta_eval &blk; metaclass.instance_eval &blk; end
+
+    # Adds methods to a metaclass
+    def meta_def name, &blk
+      meta_eval { define_method name, &blk }
+    end
+
+    # Defines an instance method within a class
+    def class_def name, &blk
+      class_eval { define_method name, &blk }
+    end
+  end
+<% end -%>
+
+<!-- End of Metaclass -->
+
+
+
+
+
+
+<!-- Class Methods -->
+
+h2. Class Methods
+
+h3. Using _self_ in Class Method
+
+*Be very careful* when using _private_ class method in _public_ class method:
+
+<% uv :lang=>"ruby" do -%>
+  class C
+    def self.foo
+      self.bar  # self.bar is same as C.bar which is illegal b/c we call private method on C
+    end
+  
+    def self.baz
+      bar
+    end
+
+    def self.bar
+      'bar'
+    end
+    private_class_method :bar
+  end
+
+  C.foo # => NoMethodError: private method `poo' called for C:Class
+  C.baz # => 'bar'
+<% end -%>
+
+<!-- End of Class Methods -->
+
+
+
+
+
+
+<!-- Singleton Methods -->
+
+h2. Singleton Methods
+
+Ruby stores instance method definitions and class variables in "normal" class object, while overrides singleton class methods in Object's metaclass (a.k.a. class's meta-object).
+Think of Ruby's metaclass as “a class which an object uses to redefine itself.” 
+
+Assuming the above metaclass helpers have been defined:
+
+<% uv :lang=>"ruby" do -%>
+  class A
+    @class_instance_var = "a class instance variable"
+    @@class_var = "a class variable"
+  
+    def self.instance_var
+      @class_instance_var  # not accessible by subclass
+    end
+  
+    def self.class_var 
+      @@class_var   # accessible by subclasses
+    end 
+  
+    def foo
+      'an instance method'
+    end
+  end
+
+  A.instance_var  # => "A class instance variable"
+  A.class_var     # => "A class varaible"
+  
+  # note: Module#intance_methods only is only availabe in class objects since Class mixed in Module (but not Object).
+  # class methods are defined in metaclass 
+  A.metaclass.instance_methods.grep /class_var$|instance_var$/  # => ["instance_var", "class_var"]
+  A.singleton_methods.grep /class_var$|instance_var$/           # => ["instance_var", "class_var"]
+  A.instance_methods.grep /class_var$|instance_var$/            # => []
+  
+  a = A.new
+  a.instance_methods                       # => Exceptions instance_methods undefined.
+  A.instance_methods.grep /foo/            # => ["foo"]
+  a.metaclass.instance_methods.grep /foo/  # => ["foo"]  # instance_methods is also kept in metaclass
+  a.singleton_methods                      # => []
+
+  # singleton_methods() is away to keep track of instance method added to the metaclass  
+  def a.bar; 'bar'; end
+  a.singleton_methods                      # => ['bar'], exists in singleton_methods
+  a.metaclass.instance_methods.grep /bar/  # => ['bar'], as well as metaclass' instance_methods
+<% end -%>
+
+Note: 
+# <code>singleton_methods</code> is can be used to keep track of methods added to the metaclass of an object.  
+# <code>metaclass.instance_methods</code> reads all available methods: including instance methods defined in class definitions.
+# <code>klass.metaclass.instance_methods</code> == <code>klass.public_methods</code> (see below)
+
+
+<!-- End of Singleton Methods -->
+
+
+
+
+
+
+<!-- Bindings -->
+
+h2. Bindings 
+
+"Reference by Jim Weirich":http://onestepback.org/index.cgi/Tech/Ruby/RubyBindings.rdoc
+
+In Ruby, bindings are explicitly made available in a <code>Binding</code> object.  You can capture the current local variables <code>Binding</code> by calling <code>Kernel#binding</code> method.
+
+Even though Ruby's bindings are object, there's no easy way to get/set variables in the a given binding.  As a result, we must use the <code>eval</code> method in <code>Kernel</code> to access variables bind to the binding object:
+
+<% uv :lang=>"ruby" do -%>
+  eval "a", vars      # evaluate the value of variable "a" in binding "vars"
+  eval "a=1337", vars # assign the value 1337 to variable "a" in binding "vars" 
+<% end -%>
+
+
+h3. Bindings and Local Scope 
+
+Local variables can captured by calling <code>binding</code>.  You can access any local variables by passing a reference of a <code>binding</code> context and calling <code>eval</code> on it:
+
+<% uv :lang=>"ruby" do -%>
+  def foo( binding_context )
+    a = "change a!"
+    eval "a", binding_context  # eval will only refer to binding the one that's in binding_context
+  end
+
+  def goo
+    a = 1337
+    foo( binding )
+  end
+
+  goo  # 1337
+<% end -%>
+
+You can also hold on to a binding long after its scope has gone out:
+
+<% uv :lang=>"ruby" do -%>
+  def bind_me
+    a, b = 2, 3
+    binding
+  end
+
+  bind_me_vars = bind_me
+  ## bind_me() is now out of scope
+  eval "a", bind_me_vars       # => 2, "a" still exist in binding
+  eval "b", bind_me_vars       # => 3, so is b
+  eval "a=1337", bind_me_vars  # you can even give it a new value!  eval will return 1337
+  eval "a", bind_me_vars       # => 1337
+<% end -%>
+
+
+h3. Blocks and Bindings 
+
+A <code>block</code> The block automatically captures and carries with it the bindings from the code location where it was created (created => block is also an object):
+
+<% uv :lang=>"ruby" do -%>
+  def var_a
+    a = "var_a"
+    lambda { a }
+  end
+
+  def redef_var_a(block)
+    a = "something other than var_a"
+    block.call          # a is still "var_a" in block's binding/context
+  end
+
+  redef_var_a( var_a )  # => "var_a"
+<% end -%>
+
+
+h3. <em>class_eval</em> V.S. <em>instance_eval</em>
+
+RDoc References:
+* "Module#class_eval":http://ruby-doc.org/core/classes/Module.html#M001672
+* "Object#instance_eval":http://www.ruby-doc.org/core/classes/Object.html#M000336
+
+Both <code>class_eval</code> and <code>instance_eval</code> takes either a string or a block and will evaluate it in the appropriate context.  For more, see below.
+
+It is also a good idea to include <code>__FILE__</code> and <code>__LINE__</code> to quick spot errors when doing metaprogramming: "eval Anti-pattern":http://ola-bini.blogspot.com/2008/01/ruby-antipattern-using-eval-without.html:
+
+<% uv :lang=>"ruby" do -%>
+  eval("puts 'hello world'")
+  # becomes
+  eval("puts 'hello world'", binding, __FILE__, __LINE__)
+
+  "str".instance_eval("puts self")
+  # becomes
+  "str".instance_eval("puts self", __FILE__, __LINE__)
+
+  String.module_eval("A=1")
+  # becomes
+  String.module_eval("A=1", __FILE__, __LINE__)
+<% end -%>
+
+
+h3. <em>Module#class_eval</em>
+
+* <code>Module#class_eval</code> is an alias for <code>Module#module_eval</code>
+* Since they are instance methods of <code>Module</code> and <code>Module</code> is mixed into <code>Class</code>, <code>class_eval</code> is specific to Class only:
+
+<% uv :lang=>"ruby" do -%>
+  class A; end
+  A.new.class_eval   # => NoMethodError: undefined method `class_eval' for #<A:0x6e1220>
+<% end -%>
+* Ruby internally uses <code>self</code> and <code>ruby_class</code> decide where it can define method when it encounters keyword like 'def', 'alias' [http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/207801 Reference]. 
+* When <code>class_eval</code> is used on a class object to define a method, it will set <code>self = obj</code>, <code>ruby_class = obj</code>.  This means that the method you defined is effectively defined as a instance method for the given class.
+
+<% uv :lang=>"ruby" do -%>
+  class A; end
+  A.class_eval do
+    def foo; puts 'foo'; end
+  end
+  A.foo       # => NoMethodError
+  A.new.foo   # => "foo"
+<% end -%>
+
+
+h3. <code>Object#instance_eval</code>
+
+* <code>instance_eval</code> is defined on <code>Object</code>, so it's available on all objects, including <code>class</code>.
+* When <code>instance_eval</code> is used on a class object to define a method, it'll set <code>self=obj</code>, <code>ruby_class = metaclass</code>. This means the method is a class method since it's being defined on metaclass.
+
+<% uv :lang=>"ruby" do -%>
+  class B; end
+  B.instance_eval do
+    def foo; puts 'foo'; end
+  end
+  B.foo       # => "foo"
+  B.new.foo   # => NoMethodError
+<% end -%>
+
+<!-- End of Bindings -->
+
+
+
+
+
+
+
+<!-- Metaprogramming Patterns -->
+
+h2. Metaprogramming Patterns
+
+
+h3. Dynamically Defined Methods
+
+One useful pattern in Ruby metaprogramming is the use of dynamically generated methods.  
+Combined with <code>metacass</code>, <code>Moduel#define_method</code> enables us to generate customized methods for the subclasses of a given class:
+
+<% uv :lang=>"ruby" do -%>
+  class MetaFactory
+    def self.build *names
+      names.each do |name|
+        meta_def "build_me_a_#{name}" do # these methods will only defined in the class that calls build()
+          "Here's a #{name}"   # You can do more here
+        end
+      end
+    end 
+  end
+
+  class Factory < MetaFactory
+    build :foo, :bar, :baz    # build_me_a_foo, build_me_a_bar, build_me_a_baz; only defined in Factory
+  end
+
+  Factory.build_me_a_foo      # => "You've got a foo", this only exist in Factory class
+
+  Factory.metaclass.instance_methods.grep /foo/  # => ["build_me_a_foo"]
+  Factory.public_methods.grep /foo/              # => ["build_me_a_foo"]
+  Factory.public_methods.sort == Factory.metaclass.instance_methods.sort # => true
+
+  # singleton_methods contains methods that has been injected into metaclass
+  Factory.singleton_methods                      # => [..., "build", "build_me_a_foo"]
+
+  # dynamically defined class method is not in parent class
+  MetaFactory.build_me_a_foo                     # => NoMethodError
+<% end -%>
+
+Note also meta_def is just a syntactical sugar to provide better code readability.  
+You can achieve the same effect by using <code>Object#instance_eval</code> on metaclass or <code>Object#instance_eval</code> on self: 
+
+<% uv :lang=>"ruby" do -%>
+  class MetaFactory
+    def self.build *names
+      names.each do |name|
+        source_code = %Q{
+          def build_me_a_#{name}
+            "Here's a #{name}"
+          end}
+        instance_eval source_code   # implicit self => Subclass Factory (class method)
+      end
+    end
+  end
+
+  class Factory < MetaFactory; build :foo; end
+
+  Factory.build_me_a_foo                         # => "You've got a foo".
+  Factory.metaclass.instance_methods.grep /foo/  # => ["build_me_a_foo"]
+  Factory.singleton_methods                      # => [..., "build", "build_me_a_foo"]
+<% end -%>
+
+The above build method is not able to use <code>Module#define_method</code> because <code>define_method</code> is only used for defining instance methods, when called within the class context.  So, the only way to use a <code>define_method</code> to define a class method is in the metaclass context.
+For various ways to define a class method in Ruby see Jay Field's ""Ruby: Defining Class Methods"":http://blog.jayfields.com/2007/10/ruby-defining-class-methods.html.
+
+<!-- End of Metaprogramming Patterns -->

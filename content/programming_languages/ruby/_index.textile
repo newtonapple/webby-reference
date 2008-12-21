@@ -8,4 +8,5 @@ filter:
 
 * [[Ruby Cheatsheet]]
 * [[Ruby Class]]
+* [[Ruby Metaprogramming]]
 * [[Ruby One-Liners]]

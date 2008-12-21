@@ -9,4 +9,5 @@ filter:
 * [[Ruby Cheatsheet]]
 * [[Ruby Class]]
 * [[Ruby Metaprogramming]]
+* [[Ruby Snippets]]
 * [[Ruby One-Liners]]

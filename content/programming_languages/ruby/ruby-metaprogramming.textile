@@ -37,12 +37,12 @@ Here is a set of useful methods when doing metaporgramming:
     def meta_eval &blk; metaclass.instance_eval &blk; end
 
     # Adds methods to a metaclass
-    def meta_def name, &blk
+    def meta_def( name, &blk )
       meta_eval { define_method name, &blk }
     end
 
     # Defines an instance method within a class
-    def class_def name, &blk
+    def class_def( name, &blk )
       class_eval { define_method name, &blk }
     end
   end
@@ -95,7 +95,7 @@ h3. Using _self_ in Class Method
 h2. Singleton Methods
 
 Ruby stores instance method definitions and class variables in "normal" class object, while overrides singleton class methods in Object's metaclass (a.k.a. class's meta-object).
-Think of Ruby's metaclass as “a class which an object uses to redefine itself.” 
+Think of Ruby's metaclass as "a class which an object uses to redefine itself."
 
 Assuming the above metaclass helpers have been defined:
 
@@ -256,7 +256,7 @@ h3. <em>Module#class_eval</em>
   A.new.class_eval   # => NoMethodError: undefined method `class_eval' for #<A:0x6e1220>
 <% end -%>
 * Ruby internally uses <code>self</code> and <code>ruby_class</code> decide where it can define method when it encounters keyword like 'def', 'alias' [http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/207801 Reference]. 
-* When <code>class_eval</code> is used on a class object to define a method, it will set <code>self = obj</code>, <code>ruby_class = obj</code>.  This means that the method you defined is effectively defined as a instance method for the given class.
+* When <code>class_eval</code> is used on a class object to define a method, it will set <code>self</code> = obj, ruby_class = obj.  This means that the method you defined is effectively defined as a instance method for the given class.
 
 <% uv :lang=>"ruby" do -%>
   class A; end
@@ -271,7 +271,7 @@ h3. <em>Module#class_eval</em>
 h3. <code>Object#instance_eval</code>
 
 * <code>instance_eval</code> is defined on <code>Object</code>, so it's available on all objects, including <code>class</code>.
-* When <code>instance_eval</code> is used on a class object to define a method, it'll set <code>self=obj</code>, <code>ruby_class = metaclass</code>. This means the method is a class method since it's being defined on metaclass.
+* When <code>instance_eval</code> is used on a class object to define a method, it'll set <code>self</code> = obj, ruby_class = <code>metaclass</code>. This means the method is a class method since it's being defined on metaclass.
 
 <% uv :lang=>"ruby" do -%>
   class B; end

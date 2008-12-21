@@ -1,0 +1,95 @@
+---
+browser_title:  Ruby Snippets
+title:          Ruby Snippets
+name:           Ruby Snippets
+created_at:     2008-12-21 14:32:50.595801 -08:00
+filter:
+  - wikiwords
+  - erb
+  - textile
+  - outline
+---
+
+<%= render :partial => '/toc' %>
+
+
+h2. Array and Enumerable 
+
+h3. Human Readable Sort
+
+"Human readable sort by Jeff Atwood":http://www.codinghorror.com/blog/archives/001018.html
+
+This code utilize <code><=></code>'s ability to sort / give total order to array:
+
+<% uv :lang => 'ruby' do -%>
+  ["aa123.txt", "ka023.rb", "ka098.rb", "ka98", "a2.txt"].sort_by do |item| 
+    item.to_s.split(/(\d+)/).map do |e| 
+      [e.to_i, e]
+    end 
+  end #=> ["a2.txt", "aa123.txt", "ka023.rb", "ka098.rb", "ka98"]
+<% end -%>
+
+
+We first split each item (file name) by its alpha, numeric, and extension components.
+
+<% uv :lang => 'ruby' do -%>
+  "aa123.txt".to_s.split(/(\d+)/) # =>  ["aa", "123", ".txt"]
+<% end -%>
+
+We then nullify any alphabetical characters to zero and convert numeric strings into their integer equivalent.
+
+<% uv :lang => 'ruby' do -%>
+  ["aa", "123", ".txt"].map{ |e| [e.to_i, e] } # => [[0, 'aa'], [123, "123"], [0, 'text']]
+  
+  # putting it all together
+  "ka023.rb".to_s.split(/(\d+)/).map{ |e| [e.to_i, e] } # => [[0, "ka"], [23, "023"], [0, ".rb"]]
+<% end -%>
+
+Lastly, we utilize <code><=></code>'s ability to give global orderings to arrays.
+
+<% uv :lang => 'ruby' do -%>
+  [[0, "ka"], [23, "023"], [0, ".rb"]] <=> [[0, 'aa'], [123, "123"], [0, 'text']] # => 1 (1st one bigger)
+  [[0, 'aa'], [123, "123"], [0, 'text']] <=> [[0, "ka"], [23, "023"], [0, ".rb"]] # => -1 (1st one smaller)
+<% end -%>
+
+
+
+
+h3. Override Array#uniq by modifying Object.eql? 
+
+"Google Group Reference by Matz":http://groups.google.com/group/comp.lang.ruby/browse_thread/thread/196678b29e82c6b7/e57b80fbcd61aaab?#e57b80fbcd61aaab
+
+p. <code>Array#uniq</code> creates hash internally to remove redundant values, so that comparison is done by <code>eql?</code> but it is filtered by <code>hash</code> value first. In other words, when you redefine "eql?" you have to redefine "hash" as well. 
+
+<% uv :lang=>'ruby' do -%>
+  class A
+    attr_accessor :f
+    def initialize f
+       @f = f
+    end
+  
+    def eql?( a2 )
+      self.f == a2.f
+    end
+  
+    def hash
+      self.f.intern.hash  # hash must always return an integer
+    end
+  end
+
+  [A.new('hehe'), A.new('hehe')].uniq   # => [#<A:0x225bd70 @f="hehe">]
+<% end -%>
+
+
+
+
+h2. Hash 
+
+h3. Convert to Array and Back 
+
+<% uv :lang=>'ruby' do -%>
+  h = Hash[ 'a' => 1, 'b' => 2, 'c' => 3 ]      # => {"a"=>1, "b"=>2, "c"=>3}
+  a = h.to_a                                    # => [["a", 1], ["b", 2], ["c", 3]]
+  Hash[ * a.flatten ]                           # => {"a"=>1, "b"=>2, "c"=>3}
+  Hash[ * a.collect{ |e| e.reverse }.flatten ]  # => {1=>"a", 2=>"b", 3=>"c"}
+<% end -%>

@@ -43,19 +43,6 @@ h2. Numbering
     $  ruby -e 'while gets; end; puts $.' < file.txt
 <% end -%>
 
-h2. Array and Enumerable 
-
-<% uv :lang => 'shell-unix-generic' do -%>
-  # human readable sort: http://www.codinghorror.com/blog/archives/001018.html
-  ["aa123.txt", "ka023.rb", "ka098.rb", "ka98", "a2.txt"].sort_by{ |item| item.to_s.split(/(\d+)/).map { |e| [e.to_i, e] } } 
-      #=> ["a2.txt", "aa123.txt", "ka023.rb", "ka098.rb", "ka98"]
-  # The code utilize <=>'s ability to sort / give total order to array
-  "aa123.txt".to_s.split(/(\d+)/) # =>  ["aa", "123", ".txt"]
-  ["aa", "123", ".txt"].map{ |e| [e.to_i, e] } # => [[0, 'aa'], [123, "123"], [0, 'text']] 
-  "ka023.rb".to_s.split(/(\d+)/).map{ |e| [e.to_i, e] } # => [[0, "ka"], [23, "023"], [0, ".rb"]]
-  [[0, "ka"], [23, "023"], [0, ".rb"]] <=> [[0, 'aa'], [123, "123"], [0, 'text']] # => 1 (1st one bigger)
-  [[0, 'aa'], [123, "123"], [0, 'text']] <=> [[0, "ka"], [23, "023"], [0, ".rb"]] # => -1 (1st one smaller) 
-<% end -%> 
 
 
 h2. Text Conversion and Substitution

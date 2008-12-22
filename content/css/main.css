@@ -5,8 +5,7 @@ layout:    nil   # no layout
 ---
 /* Elements 
  * ------------------------------------------------------------ */
-h1, h2, h3, h4, a { text-shadow: 0.25em 0.25em 0.45em #888; }
-
+h1, h2, h3, h4, h5, h6, a { text-shadow: 0.25em 0.25em 0.45em #888; }
 a { 
   font-weight: bold; 
   color: #004080;
@@ -27,13 +26,16 @@ code              {
 	max-width: 100em;
 	margin: 0 auto;
 	background: #FFF url(/images/header-background.png) repeat-x left top;
+	
 	/* Shadows and Rounded Corners */
-	-moz-border-radius: 0.8em;
-	-moz-box-shadow: 0.5em 0.5em 1em #777;
+	-moz-border-radius:    0.8em;
+	-moz-box-shadow:       0.5em 0.5em 1em #777;
+	
 	-webkit-border-radius: 0.8em;
-	-webkit-box-shadow: 0.5em 0.5em 1em #777;
-	border-radius: 0.8em;
-	box-shadow: 0.5em 0.5em 1em #777;
+	-webkit-box-shadow:    0.5em 0.5em 1em #777;
+	
+	border-radius:         0.8em;
+	box-shadow:            0.5em 0.5em 1em #777;
 }
 
 .header, .footer, .content { padding: 0.5em 2em; }
@@ -68,15 +70,17 @@ code              {
   
   /* Content
    * ------------------------------------------------------------ */
-   a.external  {
+   div.content a.external  {
       padding: 0 0 0 20px;
       background: url(/images/external-link.png) no-repeat 0 0;
-
-    }
-    
-   div.content    { font-size: 1.2em; }
-   div.content h2 { border-bottom: 1px solid #777; } 
- 
+   }
+   div.content { font-size: 1.25em; }
+   div.content h2, div.content h3, div.content h4, div.content h5, div.content h6 { margin-top: 1em; }
+   div.content h2 {   
+     margin-left: -0.5em;
+     border-bottom: 1px solid #777;  
+   } 
+   div.content { margin-left: 1em; }
 
   /* Tabs 
    * ------------------------------------------------------------ */

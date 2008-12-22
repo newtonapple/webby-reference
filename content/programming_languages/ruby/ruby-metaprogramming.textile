@@ -20,15 +20,13 @@ filter:
 
 h2. Metaclass
 
-"Reference by _why":http://whytheluckystiff.net/articles/seeingMetaclassesClearly.html
-
 In Ruby everything is an object, even Class (sort of, see reference).  
 Every object also has at least one meta-object lurks behind it. The meta-object serves as an easy way to intercept singleton-method overrides for the object. 
 
 A method is first looked up in the object's metaclass, then the object's parent class, then to parent class' metaclass than to parent class's parent class, and so on...
 Note that meta-object is also an object, so itself can also contain an meta-object: the meta-meta-object.
 
-Here is a set of useful methods when doing metaporgramming:
+Here is a set of useful methods when doing metaporgramming: "code by _why":http://whytheluckystiff.net/articles/seeingMetaclassesClearly.html
 
 <% uv :lang=>"ruby" do -%>
   class Object
@@ -228,8 +226,7 @@ RDoc References:
 * "Object#instance_eval":http://www.ruby-doc.org/core/classes/Object.html#M000336
 
 Both <code>class_eval</code> and <code>instance_eval</code> takes either a string or a block and will evaluate it in the appropriate context.  For more, see below.
-
-It is also a good idea to include <code>__FILE__</code> and <code>__LINE__</code> to quick spot errors when doing metaprogramming: "eval Anti-pattern":http://ola-bini.blogspot.com/2008/01/ruby-antipattern-using-eval-without.html:
+It is also a good idea to include <code>__FILE__</code> and <code>__LINE__</code> to quick spot errors when doing metaprogramming: "eval Anti-pattern":http://ola-bini.blogspot.com/2008/01/ruby-antipattern-using-eval-without.html
 
 <% uv :lang=>"ruby" do -%>
   eval("puts 'hello world'")
@@ -255,7 +252,7 @@ h3. <em>Module#class_eval</em>
   class A; end
   A.new.class_eval   # => NoMethodError: undefined method `class_eval' for #<A:0x6e1220>
 <% end -%>
-* Ruby internally uses <code>self</code> and <code>ruby_class</code> decide where it can define method when it encounters keyword like 'def', 'alias' [http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/207801 Reference]. 
+* Ruby internally uses <code>self</code> and <code>ruby_class</code> decide where it can define method when it encounters keyword like <code>def</code>, <code>alias</code> "reference":http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/207801 
 * When <code>class_eval</code> is used on a class object to define a method, it will set <code>self</code> = obj, ruby_class = obj.  This means that the method you defined is effectively defined as a instance method for the given class.
 
 <% uv :lang=>"ruby" do -%>
@@ -268,7 +265,7 @@ h3. <em>Module#class_eval</em>
 <% end -%>
 
 
-h3. <code>Object#instance_eval</code>
+h3. <em>Object#instance_eval</em>
 
 * <code>instance_eval</code> is defined on <code>Object</code>, so it's available on all objects, including <code>class</code>.
 * When <code>instance_eval</code> is used on a class object to define a method, it'll set <code>self</code> = obj, ruby_class = <code>metaclass</code>. This means the method is a class method since it's being defined on metaclass.

@@ -1,0 +1,289 @@
+---
+browser_title:  git
+title:          git
+name:           git
+created_at:     2008-12-21 23:33:37.641110 -08:00
+filter:
+  - wikiwords
+  - erb
+  - textile
+  - outline
+---
+
+<%= render :partial => '/toc' %>
+
+
+h2. Adding a Remote Repot 
+
+<% uv :lang => 'shell-unix-generic' do -%>
+  mkdir repo.git
+  cd repo.git
+  git init
+  touch .gitignore
+  git add .
+  git commit -m "added .gitignore" 
+  # Down to here creates the local git repository and does first commit
+
+  git remote add origin ssh://user@example.com/home/user/git/repo.git
+  git config branch.master.remote origin
+  git config branch.master.merge refs/heads/master
+  # Configure the Git repository
+
+  git push --all
+  # push the changes to the remote Git repository.
+<% end -%>
+
+
+h2. Git rebase -i 
+
+h3. Combine Multiple Local Commits into One
+
+<% uv :lang => 'shell-unix-generic' do -%>
+  # *hack*
+  git commit -a -m"one"
+  # *hack*
+  git commit -a -m"two"
+  git rebase -i HEAD~2
+  # bring us an editor, select squash "two" as squash, save, exit.
+  git log
+<% end -%>
+
+
+h3. Splitting Commits 
+
+
+In interactive mode, you can mark commits with the action "edit". However, this does not necessarily mean that git-rebase expects the result of this edit to be exactly one commit. Indeed, you can undo the commit, or you can add other commits. This can be used to split a commit into two:
+
+* Start an interactive rebase with <code>git rebase -i [commit]^</code>, where [commit] is the commit you want to split. In fact, any commit range will do, as long as it contains that commit.
+* Mark the commit you want to split with the action "<code>edit</code>". Save and exit.
+* Once get back to prompt, execute <code>git reset HEAD^</code>. The effect is that the HEAD is rewound by one, and the index follows suit. However, the working tree stays the same.
+* Now add the changes to the index that you want to have in the first commit. You can use <code>git add</code> (possibly interactively) or <code>git-gui</code> (or both) to do that.
+* Commit the now-current index with whatever commit message is appropriate now.
+* Repeat the last two steps until your working tree is clean.
+* Continue the rebase with <code>git rebase --continue</code>.
+
+If you are not absolutely sure that the intermediate revisions are consistent (they compile, pass the testsuite, etc.) you should use git-stash to stash away the not-yet-committed changes after each commit, test, and amend the commit if fixes are necessary.
+
+
+h3. Git Amend 
+
+An alternative workflow is to use git commit -amend. But this does not keep your micro history around. It just puts any recent changes into the last commit.
+
+<% uv :lang => 'shell-unix-generic' do -%>
+  # *hack1*
+  git commit -a -m"I am working on blah"
+  # *hack2*
+  git commit -amend # will make hack1 hack2 as well.
+  ...
+<% end -%>
+
+If you have a tree which has four commits on top
+
+<% uv :lang => 'shell-unix-generic' do -%>
+  git-reset --soft HEAD^^^
+  git-commit --amend
+<% end -%>
+
+In order for git-reset --soft to leave the index in the desired state, no pending stuff should be in index before beginning this process (index is the thing controlled with cmds like git-add/git-update-index/etc.).
+
+
+
+h2. Git Checkout 
+
+<% uv :lang => 'shell-unix-generic' do -%>
+  # Checkout a tag v2.1.0 (use git tag to show a list of tags)
+  git checkout v2.1.0
+<% end -%>
+
+
+h2. Git Diff 
+
+<% uv :lang => 'shell-unix-generic' do -%>
+  # diff any changes to the index (i.e. modification to any previous checked in files but not yet added/staged).
+  # but not including new files that has not been added
+  git diff
+  git diff --unified=10                # gives you 10 unchanged lines before and after changes (i.e. context for changes)
+
+  # diff any added but uncommited (staged) files.
+  # (both previously checked in or newly added, but not including new files that has not been added).
+  git diff --cached
+  git diff --cached ./somedir/         # you diff a dir
+  git diff --cached ./somedir/file     # or diff some file
+
+  # diff any changes to is and is not added to your index.
+  # (changes since last commit added or not, but not including new files that has not been added).
+  git diff head
+  git diff HEAD
+
+  # diff 2 revision back (any of the following will work):
+  git diff head^^
+  git diff head~2
+  git diff head~2 somedir/file          # you can do a diff on specific file
+  git diff head~2 somedir/              # or a sub directory
+  git diff head~2 -- somedir/file       # Note you can use -- before file name as well.
+
+  # diff two commits
+  git diff head head~2 -- somedir/file  # diff head and two commits ago.
+
+  # diff two different branches
+  git diff head master~3 --stat         # files that has changed between current branch and master branch 3 commits ago.
+  git diff ..master                     # changes that the master branch is missing (-)
+  git diff master                       # changes that are added since master branch (+)
+
+  # see only files (no diff patches)
+  git diff head head~2 --stat           # shows you the file names that has changed & how much it's changed.
+  git diff head head~2 --name-status    # shows you the file names and which that has been modified, deleted or added.
+  git diff head head~2 --numstat        # number of lines added and removed from each file (added first).
+  git diff head head~2 --name-only      # name only, nothing more.
+
+  # patches 
+  git diff ..master > master.patch      # this will diff from mater and create a patch that can be applied to current branch (notice the ..).
+  git diff head master > master.patch   # this is the same as previous command.
+  git diff ..master~3 > master.patch    # you can even get a patch from 3 revisions ago from master's head
+  git apply master.patch                # patch current branch w/ master branch (like merge)
+  patch -p1 < master.patch              # git apply is just patching a unified patch file. (same effect as above)
+<% end -%>
+
+
+h2.  Git Local Remote Branch 
+
+<% uv :lang => 'shell-unix-generic' do -%>
+  git remote add repo2 /path/to/local_repos2
+  git remote show repo2
+  git pull repo2 repo2_branch_name
+<% end -%>
+
+
+
+
+h2. Git Reset 
+
+<% uv :lang => 'shell-unix-generic' do -%>
+  git reset --hard head~4  # permanent revert to 4 commits ago
+<% end -%>
+
+
+
+
+h2. Git SVN
+
+h3. Git SVN Workflow
+
+<% uv :lang => 'shell-unix-generic' do -%>
+  # 99% of daily workflow
+  git checkout -b <work_branch>
+  #    ...hack...hack...
+  git commit -a
+
+  # switch back to master, then rebase against
+  # any revisions in the svn repo
+  git checkout master
+  git svn rebase
+
+  # now that master is current with svn,
+  # sync working branch to local master
+  git checkout <work_branch> # These two are the added steps
+  git rebase master          # which help prevent conflicts
+
+  # final upstream commit after rebasing
+  git checkout master
+  git svn rebase # one last check for new svn check ins
+  git merge <work_branch>
+  git svn dcommit -e
+<% end -%>
+
+
+h3.  Git SVN Clone 
+
+<% uv :lang => 'shell-unix-generic' do -%>
+  # You can clone (checkout) a specific revision from subversion by using the -r< option.  
+  git svn clone -r1234 http://to.your.svn.repo
+
+  # Clone a repo (like git clone):
+  git svn clone http://svn.foo.org/project -T trunk -b branches -t tags
+
+  # View all branches and tags you have cloned:
+  git branch -r
+
+  # Reset your master to trunk (or any other branch, replacing 'trunk'
+  # with the appropriate name):
+  git reset --hard remotes/trunk
+
+  # You may only dcommit to one branch/tag/trunk at a time.  The usage
+  # of dcommit/rebase/show-ignore should be the same as above.
+<% end -%>
+
+
+
+
+
+
+
+h2.  Git Log 
+
+"git-log man page":http://www.kernel.org/pub/software/scm/git/docs/git-log.html
+
+<code> git log </code> is done in reverse date order (most recent first & medium detail).
+
+h3. Two most recent commits in reverse date order.
+
+<% uv :lang => 'shell-unix-generic' do -%>
+  git log -2 
+<% end -%>
+
+Sample Output:
+
+<pre class="quote"> <code>
+  commit 371a046dd57633c5a79ec864183b509b0f8219f3
+  Author: jj <jj@b3081050-6727-0410-9636-b87e822ce5bb>
+  Date:   Thu May 22 18:21:39 2008 +0000
+
+      some message
+      
+      git-svn-id: https://host/trunk@13478 b3081050-6727-0410-9636-b87e822ce5bb
+
+  commit 8784960fe821bb8153a365d62d449a5cc2107ff7
+  Author: dd <dd@b3081050-6727-0410-9636-b87e822ce5bb>
+  Date:   Thu May 22 05:55:37 2008 +0000
+
+      fixing tests  
+      
+      git-svn-id: https://host/trunk@13472 b3081050-6727-0410-9636-b87e822ce5bb
+</code> </pre>
+
+
+h3.  Get detail stats about each commit ( message + how much each file has changed ) 
+
+<% uv :lang => 'shell-unix-generic' do -%>
+  git log --stat
+<% end -%>
+
+Sample Output:
+
+<pre class="quote"><code>
+  commit 2918a904da9343a605e57bf3db88ed62a85ca41f
+  Author: dd <dd@b3081050-6727-0410-9636-b87e822ce5bb>
+  Date:   Wed May 21 22:24:36 2008 +0000
+
+      excluding imports
+  
+      git-svn-id: https://host@13447 b3081050-6727-0410-9636-b87e822ce5bb
+
+   app/models/foobar.rb |    1 +
+   app/models/light.rb  |    4 +++-
+   2 files changed, 4 insertions(+), 1 deletions(-)
+
+
+  commit b32191937bffabeece147e13ceb5cc2f11700d29
+  Author: dd <dd@b3081050-6727-0410-9636-b87e822ce5bb>
+  Date:   Wed May 21 21:57:10 2008 +0000
+
+      adding detail view to table.
+    
+      git-svn-id: https://host@13444 b3081050-6727-0410-9636-b87e822ce5bb
+
+   app/views/admin/games/_download_csv.rhtml |    3 ++-
+   app/views/admin/games/_play.html.erb      |   23 +++++++++++++----------
+   app/views/admin/games/index.html.erb      |   24 ++++++++++++++----------
+   3 files changed, 29 insertions(+), 21 deletions(-)
+</code></pre>

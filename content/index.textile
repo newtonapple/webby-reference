@@ -11,5 +11,9 @@ filter:
     [[Programming Languages]]
     <%= render :partial => '/programming_languages/index'%>
   </li>  
+  <li>
+    [[Unix]]
+    <%= render :partial => '/unix/index'%>
+  </li>  
 </ul>
 

@@ -25,11 +25,6 @@ a {
 ul, ol { margin: 0 1.5em; }
 ul { list-style-type: square; }
 
-code              { 
-  background-color: <%= @page.color["code-background"] %>; 
-  border-bottom: 1px dotted <%= @page.color["border"] %>;
-  padding: 0.25em; 
-}
 
 /* Layout
  * ------------------------------------------------------------ */
@@ -74,7 +69,25 @@ code              {
    div.content { font-size: 1.25em; }
    div.content h2, div.content h3, div.content h4, div.content h5, div.content h6 { margin-top: 1em; }
    div.content h2 { border-bottom: 1px solid #777; } 
-
+   
+   div.content code { 
+     background-color: <%= @page.color["code-background"] %>; 
+     border-bottom: 1px dotted <%= @page.color["border"] %>;
+     padding: 0.25em; 
+   }
+   
+   div.content pre.quote {
+     margin-left: 2em;
+     border-left: 2px solid #ddd;
+   }
+   
+   div.content pre code {
+      background-color: transparent;
+      border: none;     
+   }
+   
+   
+   
   /* Tabs 
    * ------------------------------------------------------------ */
   ul.tabs       { border-bottom: 1px solid #ddd; }

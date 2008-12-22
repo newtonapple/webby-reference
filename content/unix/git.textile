@@ -13,28 +13,8 @@ filter:
 <%= render :partial => '/toc' %>
 
 
-h2. Adding a Remote Repot 
 
-<% uv :lang => 'shell-unix-generic' do -%>
-  mkdir repo.git
-  cd repo.git
-  git init
-  touch .gitignore
-  git add .
-  git commit -m "added .gitignore" 
-  # Down to here creates the local git repository and does first commit
-
-  git remote add origin ssh://user@example.com/home/user/git/repo.git
-  git config branch.master.remote origin
-  git config branch.master.merge refs/heads/master
-  # Configure the Git repository
-
-  git push --all
-  # push the changes to the remote Git repository.
-<% end -%>
-
-
-h2. Git rebase -i 
+h2. git rebase -i 
 
 h3. Combine Multiple Local Commits into One
 
@@ -65,7 +45,7 @@ In interactive mode, you can mark commits with the action "edit". However, this 
 If you are not absolutely sure that the intermediate revisions are consistent (they compile, pass the testsuite, etc.) you should use git-stash to stash away the not-yet-committed changes after each commit, test, and amend the commit if fixes are necessary.
 
 
-h3. Git Amend 
+h3. git amend 
 
 An alternative workflow is to use git commit -amend. But this does not keep your micro history around. It just puts any recent changes into the last commit.
 
@@ -88,15 +68,15 @@ In order for git-reset --soft to leave the index in the desired state, no pendin
 
 
 
-h2. Git Checkout 
+h2. git checkout 
 
 <% uv :lang => 'shell-unix-generic' do -%>
-  # Checkout a tag v2.1.0 (use git tag to show a list of tags)
+  # checkout a tag v2.1.0 (use git tag to show a list of tags)
   git checkout v2.1.0
 <% end -%>
 
 
-h2. Git Diff 
+h2. git diff 
 
 <% uv :lang => 'shell-unix-generic' do -%>
   # diff any changes to the index (i.e. modification to any previous checked in files but not yet added/staged).
@@ -145,18 +125,9 @@ h2. Git Diff
 <% end -%>
 
 
-h2.  Git Local Remote Branch 
-
-<% uv :lang => 'shell-unix-generic' do -%>
-  git remote add repo2 /path/to/local_repos2
-  git remote show repo2
-  git pull repo2 repo2_branch_name
-<% end -%>
 
 
-
-
-h2. Git Reset 
+h2. git reset 
 
 <% uv :lang => 'shell-unix-generic' do -%>
   git reset --hard head~4  # permanent revert to 4 commits ago
@@ -164,10 +135,9 @@ h2. Git Reset
 
 
 
+h2. git svn
 
-h2. Git SVN
-
-h3. Git SVN Workflow
+h3. git svn Workflow
 
 <% uv :lang => 'shell-unix-generic' do -%>
   # 99% of daily workflow
@@ -193,7 +163,7 @@ h3. Git SVN Workflow
 <% end -%>
 
 
-h3.  Git SVN Clone 
+h3.  git svn clone 
 
 <% uv :lang => 'shell-unix-generic' do -%>
   # You can clone (checkout) a specific revision from subversion by using the -r< option.  
@@ -216,10 +186,7 @@ h3.  Git SVN Clone
 
 
 
-
-
-
-h2.  Git Log 
+h2.  git log 
 
 "git-log man page":http://www.kernel.org/pub/software/scm/git/docs/git-log.html
 
@@ -287,3 +254,36 @@ Sample Output:
    app/views/admin/games/index.html.erb      |   24 ++++++++++++++----------
    3 files changed, 29 insertions(+), 21 deletions(-)
 </code></pre>
+
+
+
+h2. Remote Branches
+
+h3. Adding a Remote Repo
+
+<% uv :lang => 'shell-unix-generic' do -%>
+  mkdir repo.git
+  cd repo.git
+  git init
+  touch .gitignore
+  git add .
+  git commit -m "added .gitignore" 
+  # Down to here creates the local git repository and does first commit
+
+  git remote add origin ssh://user@example.com/home/user/git/repo.git
+  git config branch.master.remote origin
+  git config branch.master.merge refs/heads/master
+  # Configure the git repository
+
+  git push --all
+  # push the changes to the remote git repository.
+<% end -%>
+
+
+h3.  Adding Local Remote Branch 
+
+<% uv :lang => 'shell-unix-generic' do -%>
+  git remote add repo2 /path/to/local_repos2
+  git remote show repo2
+  git pull repo2 repo2_branch_name
+<% end -%>

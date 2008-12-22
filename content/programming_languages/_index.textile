@@ -1,0 +1,11 @@
+---
+filter:
+  - wikiwords
+  - erb
+---
+<ul>
+  <li>
+    [[Ruby]]
+    <%= render :partial => '/programming_languages/ruby/index' %>
+  </li>
+</ul>

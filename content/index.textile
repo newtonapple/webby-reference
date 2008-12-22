@@ -5,15 +5,11 @@ name:           Index
 filter:
   - wikiwords
   - erb
-  - textile
-  - outline
 ---
-
-<%= render :partial => '/toc' %>
-
-h2. [[Programming Languages]]
-
-h3. [[Ruby]]
-
-<%= render :partial => '/programming_languages/ruby/index'%>
+<ul id="index">
+  <li>
+    [[Programming Languages]]
+    <%= render :partial => '/programming_languages/index'%>
+  </li>  
+</ul>
 

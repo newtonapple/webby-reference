@@ -22,6 +22,9 @@ a {
   color: <%= @page.color["link"] %>;
 }
 
+ul, ol { margin: 0 1.5em; }
+ul { list-style-type: square; }
+
 code              { 
   background-color: <%= @page.color["code-background"] %>; 
   border-bottom: 1px dotted <%= @page.color["border"] %>;

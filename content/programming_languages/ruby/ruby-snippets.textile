@@ -53,8 +53,6 @@ Lastly, we utilize <code><=></code>'s ability to give global orderings to arrays
 <% end -%>
 
 
-
-
 h3. Override Array#uniq by modifying Object.eql? 
 
 "Google Group Reference by Matz":http://groups.google.com/group/comp.lang.ruby/browse_thread/thread/196678b29e82c6b7/e57b80fbcd61aaab?#e57b80fbcd61aaab

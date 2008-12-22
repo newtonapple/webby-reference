@@ -7,11 +7,5 @@ filter:
   - wikiwords
   - erb
   - textile
-  - outline
 ---
-
-<%= render :partial => '/toc' %>
-
-h2. Ruby
-
 <%= render :partial => '/programming_languages/ruby/index' %>

@@ -2,12 +2,15 @@
 filter:
   - wikiwords
   - erb
-  - textile
 ---
-[[Programming Languages]]
-
-* [[Ruby Cheatsheet]]
-* [[Ruby Class]]
-* [[Ruby Metaprogramming]]
-* [[Ruby Snippets]]
-* [[Ruby One-Liners]]
+<ul>
+  <li> [[Ruby Cheatsheet]]      </li>
+  <li> [[Ruby Class]]           </li>
+  <li> [[Ruby Metaprogramming]] </li>
+  <li> 
+       [[Ruby Networking]]
+       <%= render :partial => '/programming_languages/ruby/networking/index' %>
+  </li>
+  <li> [[Ruby Snippets]]        </li>
+  <li> [[Ruby One-Liners]]      </li>
+</ul>

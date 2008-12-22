@@ -1,0 +1,58 @@
+---
+browser_title:  EventMachine
+title:          EventMachine
+name:           EventMachine
+created_at:     2008-12-21 22:25:33.297678 -08:00
+filter:
+  - wikiwords
+  - erb
+  - textile
+  - outline
+---
+
+<%= render :partial => '/toc' %>
+
+
+h2. What is the order of functions called? 
+
+
+These will only be called when a connection is made (though a connection which is attempted will also call a few before it fails).
+
+
+h3. With a client 
+
+
+# <code>EM.connect( '127.0.0.1', port, EchoClient?)</code> called first
+# <code>initialize</code> method (called by EM on a new instance--currently without any parameters and only internally)
+# <code>post_init</code> (always called)
+# block given to <code>EM.connect</code> (always called)
+# <code>connection_completed</code> (called on success, else unbind) 
+# <code>receive_data</code> (called by EM--when it receives incoming data and it's that port's turn to process it--it will pass it "all or most" of incoming data).
+# <code>send_data</code>, <code>send_file_data</code>, <code>send_datagram</code> called by you--puts those things in EM's outbound queue for that connection. 
+# <code>close_connection</code>, <code>close_connection_after_writing</code>, <code>EM::(stop | stop_event_loop)</code> all shut it down (called by you).
+# <code>unbind</code> 
+
+
+h3. With a server (only on incoming connections, once per connection): 
+
+
+# <code>initialize</code>
+# <code>post_init</code> (called by EM)
+# <code>EM.start_server</code> block (the block you passed to the start server call, called by EM) 
+# <code>send_data/send_file_data/send_datagram</code> (called by you)
+# <code>receive_data</code> (called by EM)
+# <code>stop_server</code> (called by you -- stops server from listening, though existing connections are still live) -- see documentation 
+# <code>close_connection</code>, <code>close_connection_after_writing</code>, <code>EM::(stop | stop_event_loop)</code> all shut it down (called by you).
+# <code>unbind</code> (when socket closed) (called by EM, whenever it closes because of you or the connecting peer)
+
+
+h2. Which are the methods you can redefine, then, that get called?
+
+
+<code>post_init</code>, <code>receive_data</code>, <code>unbind</code>, and, for clients, <code>connection_completed</code>.
+
+<em>What if I have a server connect to a client on the same host running within the same EM--which one gets executed first?</em>
+ 
+From experimentation, it appears to be post_init(client), client block, post_init server, server block, connection_completed(client), 
+then unbind of the one that makes the first call to close_connection (i.e. if server calls close_connection, its unbind is called first [right then?], 
+then the clients').

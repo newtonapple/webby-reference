@@ -12,8 +12,10 @@ filter:
 
 <%= render :partial => '/toc' %>
 
-"Source":http://www.fepus.net/ruby1line.txt
 
+h2. Source 
+
+"Source by Dave Thomas":http://www.fepus.net/ruby1line.txt
 
 h2. File Spancing
 

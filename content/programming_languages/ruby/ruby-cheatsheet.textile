@@ -11,13 +11,9 @@ filter:
 
 <%= render :partial => '/toc' %>
 
-h2. General Resources
-
-"Ruby QuickRef":http://www.zenspider.com/Languages/Ruby/QuickRef.html
-
-
 h2. Language
 
+"Ruby QuickRef by Ryan Davis":http://www.zenspider.com/Languages/Ruby/QuickRef.html
 
 h3. Syntax Rules
 

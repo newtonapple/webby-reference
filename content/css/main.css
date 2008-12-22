@@ -1,23 +1,32 @@
 ---
-extension: css
-#filter:    erb
+filter:   erb
 layout:    nil   # no layout
+
+color:
+  link:              "#004080"
+  code-background:   "#ddd"
+  border:            "#999"
+  text-shadow:       "#888"
+  wrapper:           "#fff"
+  wrapper-shadow:    "#777"
+  
+spacing:
+  text-shadow:    "0.25em 0.25em 0.45em"
+  wrapper-shadow: "0.5em  0.5em  1em"  
 ---
 /* Elements 
  * ------------------------------------------------------------ */
-h1, h2, h3, h4, h5, h6, a { text-shadow: 0.25em 0.25em 0.45em #888; }
+h1, h2, h3, h4, h5, h6, a { text-shadow: <%= @page.spacing["text-shadow"] %> <%= @page.color["text-shadow"] %>; }
 a { 
-  font-weight: bold; 
-  color: #004080;
+  font-weight: bold;
+  color: <%= @page.color["link"] %>;
 }
 
 code              { 
-  background-color: #ddd; 
-  border-bottom: 1px dotted #999;
-  padding: 0.25em;
-  
+  background-color: <%= @page.color["code-background"] %>; 
+  border-bottom: 1px dotted <%= @page.color["border"] %>;
+  padding: 0.25em; 
 }
-
 
 /* Layout
  * ------------------------------------------------------------ */
@@ -25,17 +34,17 @@ code              {
 	width: 80%;
 	max-width: 100em;
 	margin: 0 auto;
-	background: #FFF url(/images/header-background.png) repeat-x left top;
+	background: <%= @page.color["wrapper"] %> url(/images/header-background.png) repeat-x left top;
 	
 	/* Shadows and Rounded Corners */
 	-moz-border-radius:    0.8em;
-	-moz-box-shadow:       0.5em 0.5em 1em #777;
+	-moz-box-shadow:       <%= @page.spacing["wrapper-shadow"] %> <%= @page.color["wrapper-shadow"] %>;
 	
 	-webkit-border-radius: 0.8em;
-	-webkit-box-shadow:    0.5em 0.5em 1em #777;
+	-webkit-box-shadow:    <%= @page.spacing["wrapper-shadow"] %> <%= @page.color["wrapper-shadow"] %>;
 	
 	border-radius:         0.8em;
-	box-shadow:            0.5em 0.5em 1em #777;
+	box-shadow:            <%= @page.spacing["wrapper-shadow"] %> <%= @page.color["wrapper-shadow"] %>;
 }
 
 .header, .footer, .content { padding: 0.5em 2em; }
@@ -48,22 +57,7 @@ code              {
 }
 
 .header        { padding-top: 1em; }
-.content       { border-bottom: 1px solid #999; }
-.break         { clear:both; }
-.related_pages { float:left; }
-.subpages      { float:right; }
-
-.page_content {
-	width: 70%;
-	float: left;
-	font-size: 1.2em;
-}
-
-.subpage_navigation {
-	width: 28%;
-	float: right;
-}
-
+.content       { border-bottom: 1px solid <%= @page.color["border"] %>; }
 
 /* Components 
  * ------------------------------------------------------------ */
@@ -71,22 +65,17 @@ code              {
   /* Content
    * ------------------------------------------------------------ */
    div.content a.external  {
-      padding: 0 0 0 20px;
-      background: url(/images/external-link.png) no-repeat 0 0;
+      padding: 0 1em 0 0;
+      background: url(/images/external-link.png) no-repeat 100% 0;
    }
    div.content { font-size: 1.25em; }
    div.content h2, div.content h3, div.content h4, div.content h5, div.content h6 { margin-top: 1em; }
-   div.content h2 {   
-     margin-left: -0.5em;
-     border-bottom: 1px solid #777;  
-   } 
-   div.content { margin-left: 1em; }
+   div.content h2 { border-bottom: 1px solid #777; } 
 
   /* Tabs 
    * ------------------------------------------------------------ */
   ul.tabs       { border-bottom: 1px solid #ddd; }
     ul.tabs li  { margin-right:0.1em; }
-
       ul.tabs a { 
         color:      #555;
         background: #ddd none repeat scroll 0 0; 
@@ -98,5 +87,5 @@ code              {
         font-weight:     bold;
         text-decoration: none;
       	padding:         0.2em 0.5em;
-      	text-shadow:     0.25em 0.25em 0.45em #888; 
+      	text-shadow:     <%= @page.spacing["text-shadow"] %> <%= @page.color["text-shadow"] %>;; 
       }

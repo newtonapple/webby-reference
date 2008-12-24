@@ -1,0 +1,27 @@
+A simple reference system built on Webby.  Designed to focus on code and tries to leverage the useful features of Webby like *wikiwords*. 
+
+
+"Sample Reference":http://reference.jumpingmonkey.org/
+
+h4. Advantage of using a statically generated reference system:
+
+# Static pages are fast! Yea, like hella fast.
+# Keep your text editor.
+# Er, you can git it?
+# Simple graphs (graphivz)
+# Simple syntax hightlight (CodeRay or Ultraviolet)
+
+h4. Disadvantages of using a statically generated reference system:
+
+# Can't edit it in the browser (yet).
+# File management can be a bit of pain in the butt.
+# NO custom searches (though Google could help).
+
+h4. TODOs
+
+* better table of content
+* improvement of tabs / breadcrumbs
+* a convention for automatic file managements (automatically aggregate table of content across pages)
+* SEO optimizations
+* more contents!
+* allow browser edit (through a crazy hack maybe)?

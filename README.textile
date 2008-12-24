@@ -9,7 +9,7 @@ h4. Advantage of using a statically generated reference system:
 # Keep your text editor.
 # Er, you can git it?
 # Simple graphs (graphivz)
-# Simple syntax hightlight (CodeRay or Ultraviolet)
+# Simple syntax highlight (CodeRay or Ultraviolet)
 
 h4. Disadvantages of using a statically generated reference system:
 

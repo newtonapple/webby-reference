@@ -6,7 +6,7 @@ created_at:     2008-12-20 13:54:33.013248 -08:00
 filter:
   - wikiwords
   - erb
-  - textile
+  - textile_plus
   - outline
 ---
 

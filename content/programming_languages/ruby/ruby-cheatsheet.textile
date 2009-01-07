@@ -5,15 +5,19 @@ name:           Ruby Cheatsheet
 filter:
   - wikiwords
   - erb
-  - textile
+  - textile_plus
   - outline
 ---
 
 <%= render :partial => '/toc' %>
 
+
+
+
 h2. Language
 
 "Ruby QuickRef by Ryan Davis":http://www.zenspider.com/Languages/Ruby/QuickRef.html
+
 
 h3. Syntax Rules
 

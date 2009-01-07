@@ -6,11 +6,13 @@ created_at:     2008-12-20 14:23:55.902750 -08:00
 filter:
   - wikiwords
   - erb
-  - textile
+  - textile_plus
   - outline
 ---
 
 <%= render :partial => '/toc' %>
+
+
 
 
 h2.  Relationships of Class, Module, and Object 
@@ -40,6 +42,8 @@ h2.  Relationships of Class, Module, and Object
 <% end -%>
 
 
+
+
 h2.  Object 
 
 * "Object Doc":http://ruby-doc.org/core/classes/Object.html
@@ -65,6 +69,8 @@ h2.  Module
   Mod.constants          #=> ["E", "PI", "CONST"]
   Mod.instance_methods   #=> ["meth"]
 <% end -%>
+
+
 
 
 h2. Useful Module Class Methods
@@ -130,12 +136,18 @@ You can use <code>extend self</code> trick to turn all instances methods into cl
 <% end -%>
 
 
+
+
+
 h2.  Class 
 
 * "Class Doc":http://ruby-doc.org/core/classes/Class.html
 * Ruby classes are first-class objects: each is an instance of class <code>Class</code>.
 * New class is created by instantiating a new object of type <code>Class</code>.  The object is assigned to a global constant (the Name of the class).
 * When <code>Name.new</code> is called, the <code>new</code> (instance) method in <code>Class</code> is run by default.
+
+
+
 
 
 h2.  Useful Class Instance Methods 

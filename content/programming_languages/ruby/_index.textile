@@ -13,4 +13,8 @@ filter:
   </li>
   <li> [[Ruby Snippets]]        </li>
   <li> [[Ruby One-Liners]]      </li>
+  <li> 
+       [[Ruby Tools]]
+       <%= render :partial => '/programming_languages/ruby/tools/index' %>
+  </li>
 </ul>

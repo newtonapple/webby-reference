@@ -1,0 +1,35 @@
+---
+browser_title:  Webby
+title:          Webby
+name:           Webby
+created_at:     2009-01-06 19:06:18.926374 -08:00
+filter:
+  - wikiwords
+  - erb
+  - textile
+  - outline
+---
+
+<%= render :partial => '/toc' %>
+
+h2. Webby Commands
+
+Use <code>webby -T</code> to get a list of available command.  <code>webby -T</code> is basically like <code>rake -T</code>. You can specify a task <code>webby -T [task]</code> to search for tasks matching the given PATTERN.  As with Rake you can use <code>webby -D</code> for a more detailed description.
+
+<% uv :lang => 'shell-unix-generic' do -%>
+  > webby -T
+  
+  webby autobuild              # Continuously build the website
+  webby build                  # Build the website
+  webby clobber                # Delete the website
+  webby create:page            # Create a new page
+  webby create:partial         # Create a new partial
+  webby deploy                 # deploy the site to the webserver
+  webby deploy:rsyc_mac_local  # Rsync to local file system
+  webby deploy:rsync           # Deploy to the server using rsync
+  webby deploy:ssh             # Deploy to the server using ssh
+  webby rebuild                # Rebuild the website
+  webby validate               # Alias to validate:internal
+  webby validate:external      # Validate hyperlinks (include external sites)
+  webby validate:internal      # Validate hyperlinks (exclude exteranl sites)
+<% end -%>  

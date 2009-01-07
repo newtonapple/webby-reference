@@ -75,7 +75,7 @@ Here is a sample task to deploy the output to a local nfs mount on server using 
 <% uv :lang => 'ruby' do -%>
   namespace :deploy do
     desc 'Rsync to local file system'
-    task :rsyc_mac_local do
+    task :rsync_mac_local do
       sh "rsync -avz --delete --exclude .DS_Store  --exclude .cairn  #{SITE.output_dir}/ #{SITE.local_dir}"
     end # task :rsyc_mac_local
   end  # namespace :deploy

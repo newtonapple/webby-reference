@@ -8,4 +8,8 @@ filter:
     [[Ruby]]
     <%= render :partial => '/programming_languages/ruby/index' %>
   </li>
+  <li>
+    [[Objective-C]]
+    <%= render :partial => '/programming_languages/objective-c/index' %>
+  </li>
 </ul>

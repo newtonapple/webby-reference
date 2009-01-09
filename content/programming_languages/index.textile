@@ -8,4 +8,4 @@ filter:
   - erb
   - textile
 ---
-<%= render :partial => '/programming_languages/ruby/index' %>
+<%= render :partial => '/programming_languages/index' %>

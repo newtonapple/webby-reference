@@ -5,7 +5,7 @@ name:           Ruby Cheatsheet
 filter:
   - wikiwords
   - erb
-  - textile_plus
+  - textile
   - outline
 ---
 

@@ -285,10 +285,21 @@ h3. Adding a Remote Repo
 <% end -%>
 
 
-h3.  Adding Local Remote Branch 
+h3. Adding Local Remote Branch 
 
 <% uv :lang => 'shell-unix-generic' do -%>
   git remote add repo2 /path/to/local_repos2
   git remote show repo2
   git pull repo2 repo2_branch_name
 <% end -%>
+
+
+h3. Force Push <em>admended</em> Changes to Remote Repo
+
+"Stackoverflow Reference":http://stackoverflow.com/questions/253055/how-do-i-push-amended-commit-to-the-remote-git-repo
+
+<% uv :lang => 'shell-unix-generic' do -%>
+  git push origin +master:master  
+<% end -%>
+
+In general we can follow this push convention <code>git push origin [local_repo]:[remote_repot]</code>.  The <code>+</code> sign will tell git not to enforce <em>fast-forward</em> only commit.

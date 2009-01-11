@@ -18,27 +18,7 @@ Types
 
 ### class
 
-[[Objective-C]] classes are declared using <code>@interface</code> block and implementations are specified in <code>@implementation</code> block.
-
-<% uv :lang => 'objective-c' do -%>
-  // ---- @interface ----
-  @interface Fraction : NSObject {  // inherit from NSObject
-      int numerator;
-      int denominator;
-  }
-  - (void)print;
-  - (void)setNumerator:(int)n;
-  - (void)setDenominator:(int)d;
-  @end
-  
-  // ---- @implementation ----
-  @implementation Fraction   // you can optionally specify :NSObject after Fraction
-  - (void)print { NSLog(@"%i/%i", numerator, denominator); }
-  - (void)setNumerator:(int)n { numerator = n; }
-  - (void)setDenominator:(int)d { denominator = d; }
-  @end
-<% end -%>
-
+See: [[Objective-C Class]].
 
 ### double
 

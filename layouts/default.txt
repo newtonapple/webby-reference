@@ -41,7 +41,7 @@ filter:
     </div>
 
     <div class='footer'> 
-      <span class="dtupdated">Last generated on <%= Time.now.strftime("%m/%d/%y") %> </span>
+      <span class="dtupdated">Last updated: <%= Time.now.strftime("%m/%d/%y") %> </span>
       <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/">
         <img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/us/80x15.png" />
       </a>

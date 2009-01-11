@@ -4,5 +4,6 @@ filter:
   - erb
 ---
 <ul>
+  <li> [[Objective-C Class]] </li>
   <li> [[Objective-C Types]] </li>
 </ul>

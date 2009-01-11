@@ -14,9 +14,6 @@ spacing:
   text-shadow:    "0.25em 0.25em 0.45em"
   wrapper-shadow: "0.5em  0.5em  1em"  
 ---
-body {
- font-family: "Helvetica Neue", Helvetica, Verdana, Arial, sans-serif;
-}
 
 /* Elements 
  * ------------------------------------------------------------ */

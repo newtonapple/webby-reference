@@ -6,7 +6,7 @@ created_at:     2008-12-20 14:23:55.902750 -08:00
 filter:
   - wikiwords
   - erb
-  - textile
+  - md
   - outline
 ---
 
@@ -15,8 +15,8 @@ filter:
 
 
 
-h2.  Relationships of Class, Module, and Object 
-
+Relationships of Class, Module, and Object 
+-------------------------------------------
 * vertical arrows represent inheritance
 * parentheses represent meta-classes
 * all metaclasses are instances of the class <code>Class</code>
@@ -44,14 +44,16 @@ h2.  Relationships of Class, Module, and Object
 
 
 
-h2.  Object 
+Object 
+-------
 
-* "Object Doc":http://ruby-doc.org/core/classes/Object.html
+* [Object Doc](http://ruby-doc.org/core/classes/Object.html)
 
 
-h2.  Module 
+Module 
+-------
 
-* "Module Doc":http://ruby-doc.org/core/classes/Module.html
+* [Module Doc](http://ruby-doc.org/core/classes/Module.html)
 * Module is collection of methods and constants.
 * Methods in a module may be instance methods or module methods.
 * Instance methods appear as (instance) methods in a class when the module is included, module methods don't.
@@ -73,10 +75,10 @@ h2.  Module
 
 
 
-h2. Useful Module Class Methods
+Useful Module Class Methods
+---------------------------
 
-
-h3. Mod.included( other_mod )
+### Mod.included( other_mod )
 
 Callback invoked whenever the receiver is included in another module or class.
 
@@ -120,7 +122,7 @@ A common Ruby idiom for using <code>mod.included</code>:
 <% end -%>
 
 
-h3. Mod.extend
+### Mod.extend
 
 You can use <code>extend self</code> trick to turn all instances methods into class methods of the module:
 
@@ -136,12 +138,11 @@ You can use <code>extend self</code> trick to turn all instances methods into cl
 <% end -%>
 
 
+Class
+-----
 
 
-
-h2.  Class 
-
-* "Class Doc":http://ruby-doc.org/core/classes/Class.html
+* [Class Doc](http://ruby-doc.org/core/classes/Class.html)
 * Ruby classes are first-class objects: each is an instance of class <code>Class</code>.
 * New class is created by instantiating a new object of type <code>Class</code>.  The object is assigned to a global constant (the Name of the class).
 * When <code>Name.new</code> is called, the <code>new</code> (instance) method in <code>Class</code> is run by default.
@@ -150,11 +151,13 @@ h2.  Class
 
 
 
-h2.  Useful Class Instance Methods 
+Useful Class Instance Methods
+-----------------------------
+
 
 Noticed the methods are instance methods of <code>Class</code>, but class methods of the defined classes.
 
-h3. inherited(subclass)
+### inherited(subclass)
 
 Callback invoked whenever a subclass of the current class is created.
 
@@ -170,7 +173,7 @@ Callback invoked whenever a subclass of the current class is created.
 <% end -%>
 
 
-h3. class.superclass
+### class.superclass
 
 Returns the superclass of class, or nil
 

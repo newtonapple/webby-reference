@@ -6,7 +6,8 @@ task :deploy => [:build, 'deploy:rsyc_mac_local']
 SITE.local_dir   = '/Volumes/reference_deployment/'
 # SITE.create_mode = 'directory'
 
-SITE.uv[:theme] = 'twilight'
+# SITE.uv[:theme] = 'twilight'
+SITE.uv[:theme] = 'dawn_modified'
 SITE.uv[:line_numbers] = false
 
 task :autobuild => :growl

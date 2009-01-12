@@ -42,14 +42,8 @@ Relationships of Class, Module, and Object
                                 +----------------+
 <% end -%>
 
-
-
-
-
-Object 
--------
-
 * [Object Doc](http://ruby-doc.org/core/classes/Object.html)
+
 
 
 Module 
@@ -74,11 +68,6 @@ Module
   Mod.instance_methods   #=> ["meth"]
 <% end -%>
 
-
-
-
-Useful Module Class Methods
----------------------------
 
 ### Mod.included( other_mod )
 
@@ -140,9 +129,10 @@ You can use <code>extend self</code> trick to turn all instances methods into cl
 <% end -%>
 
 
+
+
 Class
 -----
-
 
 * [Class Doc](http://ruby-doc.org/core/classes/Class.html)
 * Ruby classes are first-class objects: each is an instance of class <code>Class</code>.
@@ -150,18 +140,9 @@ Class
 * When <code>Name.new</code> is called, the <code>new</code> (instance) method in <code>Class</code> is run by default.
 
 
+### Class.inherited
 
-
-
-Useful Class Instance Methods
------------------------------
-
-
-Noticed the methods are instance methods of <code>Class</code>, but class methods of the defined classes.
-
-### inherited(subclass)
-
-Callback invoked whenever a subclass of the current class is created.
+<code>class.inherited</code> is a callback that gets invoked whenever a subclass of the current class is created.
 
 <% uv :lang=>'ruby' do -%>
   class Foo
@@ -175,7 +156,7 @@ Callback invoked whenever a subclass of the current class is created.
 <% end -%>
 
 
-### class.superclass
+### Class.superclass
 
 Returns the superclass of class, or nil
 

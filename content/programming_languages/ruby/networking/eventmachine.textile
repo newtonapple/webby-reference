@@ -8,6 +8,7 @@ filter:
   - erb
   - textile_plus
   - outline
+  - section
 ---
 
 <%= render :partial => '/toc' %>
@@ -46,7 +47,7 @@ h3. With a server (only on incoming connections, once per connection):
 # <code>unbind</code> (when socket closed) (called by EM, whenever it closes because of you or the connecting peer)
 
 
-h2. Which are the methods you can redefine, then, that get called?
+h2. Which are the methods you can redefine, then, that gets called?
 
 
 <code>post_init</code>, <code>receive_data</code>, <code>unbind</code>, and, for clients, <code>connection_completed</code>.

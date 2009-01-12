@@ -6,6 +6,7 @@ color:
   link:               "#234A97"
   code:               "#BF4F24"
   code-background:    "transparent"
+  content-header:     "#005BB1"
   border:             "#999"
   text-shadow:        "#888"
   wrapper-background: "tranparent"
@@ -66,17 +67,24 @@ body {
   border:1px solid #BCBCBC;
   line-height: 21px;
   margin-top:3.5em;
-  padding-top: 2em;
+/*  padding-top: 2em;*/
   padding-bottom: 2em;
   position:relative;
 }
   
-  .section h2, .section h3, .section h4, .section h5, .section h6, .section p, .section li {
+  .section h3, .section h4, .section h5, .section h6, .section p, .section li {
     margin-left:0;
     padding-right:200px;
   }
-  .section h2, .section h3, .section h4, .section h5, .section h6, .section p { padding-left: 21px;}
-  .section h2 { font-size: 1.5em;  }
+  
+  .section h3, .section h4, .section h5, .section h6, .section p { padding-left: 21px;}
+  .section h2 { 
+    font-size: 1.35em;
+    line-height: 1.55em;
+    border-bottom: 1px solid #C8C8C8;
+    text-align :center;
+    background: #E8E8E8 url(/images/background.png) repeat-x top;
+  }
   .section h3 { font-size: 1.2em;  }
   .section h4 { font-size: 1.15em; }
     

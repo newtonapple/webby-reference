@@ -113,7 +113,8 @@ pre.dawn_modified .String {
 }
 pre.dawn_modified .Keyword {
    font-weight: bold;
-   color: #234A97;
+/*   color: #234A97;*/
+   color: #005BB1;
 }
 pre.dawn_modified .MarkupItalic {
    color: #080808;

@@ -3,12 +3,14 @@ filter:   erb
 layout:    nil   # no layout
 
 color:
-  link:              "#004080"
-  code-background:   "#ddd"
-  border:            "#999"
-  text-shadow:       "#888"
-  wrapper:           "#fff"
-  wrapper-shadow:    "#777"
+  link:               "#234A97"
+  code:               "#BF4F24"
+  code-background:    "transparent"
+  border:             "#999"
+  text-shadow:        "#888"
+  wrapper-background: "tranparent"
+  wrapper-shadow:     "#777"
+  content:            "#636363"
   
 spacing:
   text-shadow:    "0.25em 0.25em 0.45em"
@@ -17,93 +19,107 @@ spacing:
 
 /* Elements 
  * ------------------------------------------------------------ */
-h1, h2, h3, h4, h5, h6, a { text-shadow: <%= @page.spacing["text-shadow"] %> <%= @page.color["text-shadow"] %>; }
-a { 
-  font-weight: bold;
-  color: <%= @page.color["link"] %>;
-}
+h1, h2 {  text-shadow: <%= @page.spacing["text-shadow"] %> <%= @page.color["text-shadow"] %>;   }
+a {  color: <%= @page.color["link"] %>; }
 
-ul, ol { margin: 0 1.5em; }
+ul, ol { margin: 5px 3.5em; }
 ul { list-style-type: square; }
+
 
 
 /* Layout
  * ------------------------------------------------------------ */
-.wrapper {
+ 
+body { 
+  background-color:#E8E8E8;
+  background-image:url(/images/background-glow.png);
+  background-repeat:repeat-x;
+  color:#303030;
+} 
+
+#wrapper {
 	width: 80%;
 	max-width: 100em;
 	margin: 0 auto;
-	background: <%= @page.color["wrapper"] %> url(/images/header-background.png) repeat-x left top;
-	
-	/* Shadows and Rounded Corners */
-	-moz-border-radius:    0.8em;
-	-moz-box-shadow:       <%= @page.spacing["wrapper-shadow"] %> <%= @page.color["wrapper-shadow"] %>;
-	
-	-webkit-border-radius: 0.8em;
-	-webkit-box-shadow:    <%= @page.spacing["wrapper-shadow"] %> <%= @page.color["wrapper-shadow"] %>;
-	
-	border-radius:         0.8em;
-	box-shadow:            <%= @page.spacing["wrapper-shadow"] %> <%= @page.color["wrapper-shadow"] %>;
 }
 
-.header, .footer, .content { padding: 0.5em 2em; }
+  
+#header  {  padding-top: 1em;  }
+  #header h1 {  font-size: 4em; }
+  
+#content {  color: <%= @page.color["content"] %>; }
 
-.footer {
-	padding-top: 0.5em;
-	margin-right: 1em;
+#footer {
+  padding-top: 0.5em;
+	margin: 1em;
 	text-align: right;
 	clear:both;
 }
-  .footer .dtupdated { float:left; }
-  
-.header        { padding-top: 1em; }
-.content       { border-bottom: 1px solid <%= @page.color["border"] %>; }
+  #footer .dtupdated { float:left; }
+
+
 
 /* Components 
  * ------------------------------------------------------------ */
+.section {
+  background-color: #F5F5F5;
+  border:1px solid #BCBCBC;
+  line-height: 21px;
+  margin-top:3.5em;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  position:relative;
+}
   
-  /* Content
-   * ------------------------------------------------------------ */
-   div.content a.external  {
-      padding: 0 1em 0 0;
-      background: url(/images/external-link.png) no-repeat 100% 0;
-   }
-   div.content { font-size: 1.25em; }
-   div.content h2, div.content h3, div.content h4, div.content h5, div.content h6 { margin-top: 1em; }
-   div.content h2 { border-bottom: 1px solid #777; } 
-   
-   div.content code { 
-     background-color: <%= @page.color["code-background"] %>; 
-     border-bottom: 1px dotted <%= @page.color["border"] %>;
-     padding: 0.25em; 
-   }
-   
-   div.content pre.quote {
-     margin-left: 2em;
-     border-left: 2px solid #ddd;
-   }
-   
-   div.content pre code {
-      background-color: transparent;
-      border: none;     
-   }
-   
-   
-   
-  /* Tabs 
-   * ------------------------------------------------------------ */
-  ul.tabs       { border-bottom: 1px solid #ddd; }
-    ul.tabs li  { margin-right:0.1em; }
-      ul.tabs a { 
-        color:      #555;
-        background: #ddd none repeat scroll 0 0; 
-      }
-      ul.tabs a, ul.tabs span {
-        border: 1px solid #ddd;
-        border-bottom: 0;
-        display:         block;
-        font-weight:     bold;
-        text-decoration: none;
-      	padding:         0.2em 0.5em;
-      	text-shadow:     <%= @page.spacing["text-shadow"] %> <%= @page.color["text-shadow"] %>;; 
-      }
+  .section h2, .section h3, .section h4, .section h5, .section h6, .section p, .section li {
+    margin-left:0;
+    padding-right:200px;
+  }
+  .section h2, .section h3, .section h4, .section h5, .section h6, .section p { padding-left: 21px;}
+  .section h2 { font-size: 1.5em;  }
+  .section h3 { font-size: 1.2em;  }
+  .section h4 { font-size: 1.15em; }
+    
+/* Content
+ * ------------------------------------------------------------ */
+ div#content a.external  {
+    padding: 0 1em 0 0;
+    background: url(/images/external-link.png) no-repeat 100% 0;
+ }
+ div#content { font-size: 1.25em; }
+ div#content h2, div#content h3, div#content h4, div#content h5, div#content h6 {  color: #005BB1; }
+ 
+ div#content code { 
+   color: <%= @page.color["code"] %>;
+   background-color: <%= @page.color["code-background"] %>; 
+   padding: 0.2em; 
+ }
+ 
+ div#content pre.quote {
+   margin-left: 2em;
+   border-left: 2px solid #ddd;
+ }
+ 
+ div#content pre code {
+    border: none;
+ }
+ 
+ 
+ 
+/* Tabs 
+ * ------------------------------------------------------------ */
+ul.tabs       { border-bottom: 1px solid #ddd; }
+  ul.tabs li  { margin-right:0.1em; }
+    ul.tabs a { 
+      color:      #555;
+      background: #ddd none repeat scroll 0 0; 
+    }
+    ul.tabs a, ul.tabs span {
+      border: 1px solid #ddd;
+      border-bottom: 0;
+      display:         block;
+      font-weight:     bold;
+      text-decoration: none;
+    	padding:         0.2em 0.5em;
+    	text-shadow:     <%= @page.spacing["text-shadow"] %> <%= @page.color["text-shadow"] %>;
+    }

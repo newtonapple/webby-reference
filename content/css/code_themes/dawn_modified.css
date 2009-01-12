@@ -1,9 +1,11 @@
 pre.dawn_modified {
-/*  background-color:#EBEBEB;*/
+  background-color:#EBEBEB;
   border-bottom:1px solid #D5D5D5;
   border-top:   1px solid #D5D5D5;
   margin:       1em auto;
   padding:      1em;
+  line-height:  1em;
+  font-family ProFont, Monaco, monospace;
 }
 
 pre.dawn_modified .MetaSeparator {
@@ -42,7 +44,7 @@ pre.dawn_modified .line-numbers {
    color: #000000;
 }
 pre.dawn_modified {
-   background-color: #F9F9F9;
+/*   background-color: #F9F9F9;*/
    color: #080808;
 }
 pre.dawn_modified .StringConstant {

@@ -4,5 +4,5 @@ filter:
   - erb
 ---
 <ul>
-  <li> [[git]] </li>
+  <li> [[Git]] </li>
 </ul>

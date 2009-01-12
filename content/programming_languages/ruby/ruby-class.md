@@ -8,6 +8,7 @@ filter:
   - erb
   - md
   - outline
+  - section
 ---
 
 <%= render :partial => '/toc' %>
@@ -22,24 +23,25 @@ Relationships of Class, Module, and Object
 * all metaclasses are instances of the class <code>Class</code>
 
 <% uv :lang=>'ruby' do -%>    
-                          +------------------+
-                          |                  |
-            Object---->(Object)              |
-             ^  ^        ^  ^                |
-             |  |        |  |                |
-             |  |  +-----+  +---------+      |
-             |  |  |                  |      |
-             |  +-----------+         |      |
-             |     |        |         |      |
-      +------+     |     Module--->(Module)  |
-      |            |        ^         ^      |
- OtherClass-->(OtherClass)  |         |      |
-                            |         |      |
-                          Class---->(Class)  |
-                            ^                |
-                            |                |
-                            +----------------+
+                              +------------------+
+                              |                  |
+                Object---->(Object)              |
+                 ^  ^        ^  ^                |
+                 |  |        |  |                |
+                 |  |  +-----+  +---------+      |
+                 |  |  |                  |      |
+                 |  +-----------+         |      |
+                 |     |        |         |      |
+          +------+     |     Module--->(Module)  |
+          |            |        ^         ^      |
+     OtherClass-->(OtherClass)  |         |      |
+                                |         |      |
+                              Class---->(Class)  |
+                                ^                |
+                                |                |
+                                +----------------+
 <% end -%>
+
 
 
 

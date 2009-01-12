@@ -8,6 +8,7 @@ filter:
   - erb
   - textile
   - outline
+  - section
 ---
 
 <%= render :partial => '/toc' %>

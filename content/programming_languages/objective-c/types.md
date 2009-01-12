@@ -8,6 +8,7 @@ filter:
   - erb
   - md
   - outline
+  - section
 ---
 
 <%= render :partial => '/toc' %>

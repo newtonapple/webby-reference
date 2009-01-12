@@ -1,20 +1,21 @@
 ---
-browser_title:  git
-title:          git
-name:           git
+browser_title:  Git
+title:          Git
+name:           Git
 created_at:     2008-12-21 23:33:37.641110 -08:00
 filter:
   - wikiwords
   - erb
   - textile
   - outline
+  - section
 ---
 
 <%= render :partial => '/toc' %>
 
 
 
-h2. git rebase -i 
+h2. Git rebase -i 
 
 h3. Combine Multiple Local Commits into One
 
@@ -44,7 +45,7 @@ In interactive mode, you can mark commits with the action <code>edit</code>. How
 If you are not absolutely sure that the intermediate revisions are consistent (they compile, pass the testsuite, etc.) you should use git-stash to stash away the not-yet-committed changes after each commit, test, and amend the commit if fixes are necessary.
 
 
-h3. git amend 
+h3. Git amend 
 
 An alternative workflow is to use git commit -amend. But this does not keep your micro history around. It just puts any recent changes into the last commit.
 
@@ -68,7 +69,7 @@ In order for <code>git-reset --soft</code> to leave the index in the desired sta
 
 
 
-h2. git checkout 
+h2. Git checkout 
 
 <% uv :lang => 'shell-unix-generic' do -%>
   # checkout a tag v2.1.0 (use git tag to show a list of tags)
@@ -78,7 +79,7 @@ h2. git checkout
 
 
 
-h2. git diff 
+h2. Git diff 
 
 <% uv :lang => 'shell-unix-generic' do -%>
   # diff any changes to the index (i.e. modification to any previous checked in files but not yet added/staged).
@@ -129,7 +130,7 @@ h2. git diff
 
 
 
-h2. git reset 
+h2. Git reset 
 
 <% uv :lang => 'shell-unix-generic' do -%>
   git reset --hard head~4  # permanent revert to 4 commits ago
@@ -138,9 +139,9 @@ h2. git reset
 
 
 
-h2. git svn
+h2. Git svn
 
-h3. git svn Workflow
+h3. Git svn Workflow
 
 <% uv :lang => 'shell-unix-generic' do -%>
   # 99% of daily workflow
@@ -166,7 +167,7 @@ h3. git svn Workflow
 <% end -%>
 
 
-h3.  git svn clone 
+h3.  Git svn clone 
 
 <% uv :lang => 'shell-unix-generic' do -%>
   # You can clone (checkout) a specific revision from subversion by using the -r< option.  
@@ -189,7 +190,7 @@ h3.  git svn clone
 
 
 
-h2.  git log 
+h2.  Git log 
 
 "git-log man page":http://www.kernel.org/pub/software/scm/git/docs/git-log.html
 

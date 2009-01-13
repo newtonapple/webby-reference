@@ -5,7 +5,6 @@ pre.dawn_modified {
   margin:       1em auto;
   padding:      1em;
   line-height:  1em;
-  font-family ProFont, Monaco, monospace;
 }
 
 pre.dawn_modified .MetaSeparator {
@@ -29,7 +28,7 @@ pre.dawn_modified .StringRegexpConstantCharacterEscape {
    color: #811F24;
 }
 pre.dawn_modified .Support {
-   font-weight: bold;
+/*   font-weight: bold;*/
    color: #691C97;
 }
 pre.dawn_modified .MarkupList {
@@ -128,7 +127,7 @@ pre.dawn_modified .Variable {
    color: #BF4F24;
 }
 pre.dawn_modified .Entity {
-   font-weight: bold;
+/*   font-weight: bold;*/
    color: #234A97;
 }
 pre.dawn_modified .Comment {

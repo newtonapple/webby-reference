@@ -3,19 +3,22 @@ filter:   erb
 layout:    nil   # no layout
 
 color:
-  link:               "#234A97"
   code:               "#BF4F24"
   code-background:    "transparent"
+  content:            "#636363"
   content-header:     "#005BB1"
   border:             "#999"
+  link:               "#234A97"
+  section-shadow:     "#777"
   text-shadow:        "#888"
   wrapper-background: "tranparent"
-  wrapper-shadow:     "#777"
-  content:            "#636363"
-  
+
 spacing:
+  section-shadow: "0.1em  0.1em  1.5em"  
   text-shadow:    "0.25em 0.25em 0.45em"
-  wrapper-shadow: "0.5em  0.5em  1em"  
+  
+dimension:
+  section-corner: "8px"
 ---
 
 /* Elements 
@@ -64,12 +67,12 @@ body {
  * ------------------------------------------------------------ */
 .section {
   background-color: #F5F5F5;
-  border:1px solid #BCBCBC;
-  line-height: 21px;
-  margin-top:3.5em;
-/*  padding-top: 2em;*/
+  border: 1px solid #BCBCBC;
+  line-height:    21px;
+  margin-top:     2.5em;
   padding-bottom: 2em;
-  position:relative;
+  position:       relative;
+  <%= css3_box_shadow @page.spacing['section-shadow'], @page.color['section-shadow']  %>
 }
   
   .section h3, .section h4, .section h5, .section h6, .section p, .section li {

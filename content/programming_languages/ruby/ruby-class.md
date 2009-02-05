@@ -85,7 +85,7 @@ Callback invoked whenever the receiver is included in another module or class.
 
 A common Ruby idiom for using <code>mod.included</code>:
 
-* Type: "mod"-tab, and select option 3 to generate the following template
+* Type: "mod"-tab in Textmate, and select option 3 to generate the following template
 
 <% uv :lang=>'ruby' do -%>
   module FooBar
@@ -110,6 +110,23 @@ A common Ruby idiom for using <code>mod.included</code>:
   A.bar       # => class method: bar()
   A.new.foo   # => instance method: foo()
   A.new.bar   # => instance method: bar()
+<% end -%>
+
+An example for adding associations to ActiveRecord. 
+<% uv :lang=>'ruby' do -%>
+  module TasksAssociation
+    def task_names
+      tasks.map(&:name)
+    end
+
+    def self.included(klass)
+      klass.has_many_and_belongs_to :tasks
+    end
+  end
+
+  class Todo < ActiveRecord::Base
+    include TasksAssociation  # gain todo.tasks and todo.task_names
+  end
 <% end -%>
 
 

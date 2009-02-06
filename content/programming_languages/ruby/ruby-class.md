@@ -50,6 +50,7 @@ Module
 -------
 
 * [Module Doc](http://ruby-doc.org/core/classes/Module.html)
+* [Taxonomy of Rails Plugins](http://alexyoung.org/articles/show/40/a_taxonomy_of_rails_plugins)
 * Module is collection of methods and constants.
 * Methods in a module may be instance methods or module methods.
 * Instance methods appear as (instance) methods in a class when the module is included, module methods don't.

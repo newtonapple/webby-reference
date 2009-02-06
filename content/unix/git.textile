@@ -130,6 +130,19 @@ h2. Git diff
 
 
 
+h2. Git merge
+
+
+h3. Automatic Squashing Multiple Commits during merge.
+
+You can <code>squash</code> all commits from another branch and merge them into the current by specifying <code>--squash</code> option.
+<% uv :lang => 'shell-unix-generic' do -%>
+  git merge --squash my_branch
+<% end -%>
+
+
+
+
 h2. Git reset 
 
 <% uv :lang => 'shell-unix-generic' do -%>

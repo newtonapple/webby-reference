@@ -1,0 +1,11 @@
+---
+browser_title:  MySQL
+title:          MySQL
+name:           MySQL
+created_at:     2009-02-10 12:13:53.726962 -08:00
+filter:
+  - wikiwords
+  - erb
+  - textile
+---
+<%= render :partial => '/database/mysql/index' %>

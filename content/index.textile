@@ -8,6 +8,11 @@ filter:
 ---
 <ul id="index">
   <li>
+    [[Database]]
+    <%= render :partial => '/database/index'%>
+  </li>  
+  
+  <li>
     [[Programming Languages]]
     <%= render :partial => '/programming_languages/index'%>
   </li>  

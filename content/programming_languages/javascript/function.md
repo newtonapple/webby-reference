@@ -14,11 +14,12 @@ filter:
 <%= render :partial => '/toc' %>
 
 
-Function As Object
+Function as Object
 ------------------
 
-In [[JavaScript]] an object is essentially a glorified hash. JavaScript uses a [prototypal inheritance](http://javascript.crockford.com/prototypal.html). 
-The <code>prototype</code> object (hash) in JavaScript's function provides a _class like_ definition for future objection creations. 
+[[JavaScript]] uses [Prototypal Inheritance](http://javascript.crockford.com/prototypal.html) in place of the classical OOP class inheritance model. 
+An object is essentially a <code>function</code> with a glorified definition hash: <code>prototype</code>. The <code>function.prototype</code> object 
+(hash) behaves like a _factory_ providing method signatures for object creations.
 
 
 <% uv :lang => 'javascript' do -%>
@@ -29,4 +30,4 @@ call() and apply()
 
 Reference
 ---------
-* [Many ways to implement inheritance and encapsulation](http://www.3site.eu/doc/).
+* [The many ways to implement inheritance and encapsulation.](http://www.3site.eu/doc/)

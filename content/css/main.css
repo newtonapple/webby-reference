@@ -69,7 +69,7 @@ body {
   background-color: #F5F5F5;
   border: 1px solid #BCBCBC;
   line-height:    21px;
-  margin-top:     2.5em;
+  margin-top:     4em;
   padding-bottom: 2em;
   position:       relative;
   <%= css3_box_shadow @page.spacing['section-shadow'], @page.color['section-shadow']  %>

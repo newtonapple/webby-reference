@@ -5,6 +5,10 @@ filter:
 ---
 <ul>
   <li>
+    [[JavaScript]]
+    <%= render :partial => '/programming_languages/javascript/index' %>
+  </li>
+  <li>
     [[Ruby]]
     <%= render :partial => '/programming_languages/ruby/index' %>
   </li>

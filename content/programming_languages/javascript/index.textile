@@ -1,0 +1,12 @@
+---
+browser_title:  JavaScript
+title:          JavaScript
+name:           JavaScript
+created_at:     2009-02-12 22:33:53.818696 -08:00
+filter:
+  - wikiwords
+  - erb
+  - textile
+---
+
+<%= render :partial => "programming_languages/javascript/index" %>

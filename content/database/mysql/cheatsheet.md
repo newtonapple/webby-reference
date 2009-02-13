@@ -23,9 +23,12 @@ Command Line
   mysqladmin -uroot -p -f drop database # -f is for no prompt
 <% end %>
 
-### Batch mode (Use ­t for nice table layout and ­vvv for command echoing):  
+### Batch mode 
+
+Use option <code>-t</code>for nice table layout and option <code>-vvv</code> for command echoing:  
+
 <% uv :lang => 'shell-unix-generic' do -%>
-  mysql ­u user ­p < batch_file 
+  mysql ­u user ­p -t -vvv < batch_file
 <%end %>
 
 Alternatively you can use this in mysql console:

@@ -6,12 +6,7 @@ created_at:     <%= Time.now.to_y %>
 filter:
   - wikiwords
   - erb
-  - md
-  - outline
-  - section
+  - textile
 ---
 
-<%%= render :partial => '/toc' %>
-
-Topic
------
+<%%= render :partial => "<%= directory %>/index" %>

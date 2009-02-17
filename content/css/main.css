@@ -29,7 +29,10 @@ a {  color: <%= @page.color["link"] %>; }
 ul, ol { margin: 5px 3.5em; }
 ul { list-style-type: square; }
 
-
+table {
+  width: 90%;
+  margin: 0 auto; 
+}
 
 /* Layout
  * ------------------------------------------------------------ */
@@ -90,6 +93,12 @@ body {
   }
   .section h3 { font-size: 1.2em;  }
   .section h4 { font-size: 1.15em; }
+  
+  .section .featured {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
     
 /* Content
  * ------------------------------------------------------------ */

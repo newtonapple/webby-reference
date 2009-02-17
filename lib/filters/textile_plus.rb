@@ -2,7 +2,8 @@
 if try_require('redcloth', 'RedCloth')
 
   Webby::Filters.register :textile_plus do |input|
-    red = RedCloth.new( input, [:no_span_caps] )
+    # red = RedCloth.new( input, [:no_span_caps] )
+    red = RedCloth.new( input )
     red.hard_breaks = false
     red.to_html
   end

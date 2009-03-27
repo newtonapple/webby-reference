@@ -21,8 +21,9 @@ CRUD
 ### Insert
 
 <% uv :lang => 'sql' do -%>
-  INSERT INTO table (name) VALUES ("tom"),("dick"),("harry");  # Batch Insert w/ given name column
-  INSERT INTO table VALUES ('MyName', 'MyOwner', '2002­08­31');  # Inserting one row at a time (Use NULL for NULL)
+  INSERT INTO people (name) VALUES ("tom"),("dick"),("harry");  # Batch Insert w/ given name column
+  INSERT INTO people VALUES ('MyName', '2002­08­31');  # Inserting one row at a time (Use NULL for NULL)
+  INSERT INTO people (name, company_id, created_at) SELECT name, 50, NOW() FROM people WHERE company_id = 49; # copying rows from the same table
 <% end -%>
 
 
@@ -70,7 +71,7 @@ CRUD
 #### Select with LIKE:  
 <% uv :lang => 'sql' do -%>
   SELECT * FROM table WHERE rec LIKE "blah%";  # % is wildcard ­ arbitrary ### of chars
-  SELECT * FROM table WHERE rec like "_____";  # Find 5­char values: _ is any single character
+  SELECT * FROM table WHERE rec LIKE "_____";  # Find 5­char values: _ is any single character
 <% end -%>
 
 #### Select with RLIKE / REGEXP:

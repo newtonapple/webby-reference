@@ -129,13 +129,13 @@ h2. Git diff
 
 
 
-
 h2. Git merge
 
 
 h3. Automatic Squashing Multiple Commits during merge.
 
 You can <code>squash</code> all commits from another branch and merge them into the current one by specifying <code>--squash</code> option.
+
 <% uv :lang => 'shell-unix-generic' do -%>
   git merge --squash my_branch
 <% end -%>
@@ -148,6 +148,25 @@ h2. Git reset
 <% uv :lang => 'shell-unix-generic' do -%>
   git reset --hard head~4  # permanent revert to 4 commits ago
 <% end -%>
+
+
+
+
+h2. Git revert
+
+Use git revert to revert one commit and resubmit the patch as a new commit.
+
+<% uv :lang => 'shell-unix-generic' do -%>
+  git revert 2b5c813cf2a3a5539f43f7ccfa38db7d9e3d572c
+<% end %>
+
+Usually the command automatically creates a commit with a commit log message stating which commit was reverted. Use <code>-n</code> flag to apply the change necessary to revert the named commit to your working tree and the index, but does not make the commit. 
+In addition, when this option is used, your index does not have to match the HEAD commit. The revert is done against the beginning state of your index.
+This is useful when reverting more than one commits' effect to your index in a row.
+
+<% uv :lang => 'shell-unix-generic' do -%>
+  git revert -n 2b5c813cf2a3a5539f43f7ccfa38db7d9e3d572c
+<% end %>
 
 
 
